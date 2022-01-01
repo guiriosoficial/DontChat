@@ -1,0 +1,25 @@
+.home {
+  .home__title {
+    margin-top: 60px;
+    text-align: center;
+    font-size: 60px;
+  }
+  
+  .home__form {
+    text-align: center;
+    font-size: 21px;
+    input, button {
+      font-size: 21px;
+      margin-left: 8px;
+    }
+  }
+  
+  .home__intro {
+    padding-top: 40px;
+    margin: 0 auto;
+    width: 510px;
+    text-align: left;
+    font-size: 19px;
+    line-height: 30px;
+  }
+}
