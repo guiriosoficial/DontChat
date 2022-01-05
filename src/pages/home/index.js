@@ -1,21 +1,35 @@
-import React from 'react'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './style.scss'
 
 const Home = () => {
+  const [path, setPeth] = useState('')
+  const handleChange = event => setPeth(event.target.value)
+  const navigate = useNavigate()
+
   return(
     <main className='home'>
-      <h1 className='home__title'>DONTCHAT</h1>
-      <form className='home__form'>
-        <label htmlFor='url'>www.dontchat.com/</label>
-        <input id='url' />
-        <button>Go!</button>
+      <h1>DONTCHAT</h1>
+      <form>
+        <label htmlFor='path'>www.dontchat.com/</label>
+        &nbsp;
+        <input
+          type='text'
+          id='path'
+          value={path}
+          onChange={handleChange}
+          autoCapitalize="off"
+          autoCorrect="off"
+        />
+        &nbsp;
+        <button onClick={() => navigate(path)}>Go!</button>
       </form>
-      <section className='home__intro'>
+      <section>
         Dont login, just use a URL
         <br />
-        Dont save, text is auto-saved
+        Dont save any history
         <br />
-        Dont juggle attached files, edit online with your friends
+        Dont be identified
         <br />
         Dont lose your content, download with YourURL.zip
         <br />
