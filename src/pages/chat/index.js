@@ -1,5 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useContext, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
+import { changeUsername } from '../../store/username'
+import SocketContext from '../../plugins/socket'
 import History from '../../components/history'
 import Editor from '../../components/editor'
 import io from 'socket.io-client'
@@ -7,8 +10,8 @@ import './style.scss'
 
 const Chat = () => {
   const location = useLocation().pathname
-  const socket = io.connect('http://localhost:3001')
-  const [username, setUsername] = useState('')
+  const socket = useContext(SocketContext)
+  const dispatch = useDispatch()
   
   const joinPath = () => {
     socket.emit('JOIN_PATH', location)

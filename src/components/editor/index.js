@@ -1,11 +1,15 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
+import SocketContext from '../../plugins/socket'
 import './style.scss'
 
-const FooterEditor = ({ socket, location, username }) => {
+const FooterEditor = () => {
+  const username = useSelector(({ username }) => username)
+  const location = useLocation().pathname
+  const socket = useContext(SocketContext)
   const [message, setMessage] = useState('')
-  const handleChange = event => {
-    console.log(event);
-    setMessage(event.target.value)
+  const handleChange = event => setMessage(event.target.value)
   }
 
   const sendMessage = async () => {

@@ -1,12 +1,17 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useContext, useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateMessages } from '../../store/messages'
+import SocketContext from '../../plugins/socket'
 import './style.scss'
 
-const History = ({ socket }) => {
-  const [messages, setMessages] = useState([])
+const History = () => {
+  const messages = useSelector(({ messages }) => messages)
+  const socket = useContext(SocketContext)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     socket.on('RECIVE_MESSAGE', (message) => {
-      setMessages((currentState) => [...currentState, message])
+      dispatch(updateMessages(message))
     })
   }, [socket])
 
