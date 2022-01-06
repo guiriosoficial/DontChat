@@ -1,5 +1,6 @@
 .editor {
   display: flex;
+  margin: 0 10px 10px;
 
   button {
     font-size: 21px;
@@ -7,9 +8,7 @@
 
   textarea {
     font-size: 16px;
+    max-height: 120px;
     flex: 1;
-    resize: none;
-    height: auto;
-    overflow: auto;
   }
 }
