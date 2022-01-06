@@ -1,22 +1,20 @@
-import React from 'react'
 import {
-  BrowserRouter,
+  BrowserRouter as Router,
   Routes,
   Route
 } from 'react-router-dom'
+import Home from '../pages/home/index'
+import Chat from '../pages/chat/index'
 
-import Home from './pages/home/index'
-import Chat from './pages/chat/index'
-
-const R = () => {
+const App = () => {
   return(
-    <BrowserRouter>
+    <Router>
       <Routes>
         <Route element={<Home />} path='/' exact />
         <Route element={<Chat />} path='/:url/*' />
       </Routes>
-    </BrowserRouter>
+    </Router>
   )
 }
 
-export default R;
+export default App;
