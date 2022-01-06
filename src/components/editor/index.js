@@ -10,18 +10,31 @@ const FooterEditor = () => {
   const socket = useContext(SocketContext)
   const [message, setMessage] = useState('')
   const handleChange = event => setMessage(event.target.value)
+
+  const getDateTime = () => {
+    const formatString = (value) => String(value).padStart(2, '0')
+    const now = new Date()
+    const year = formatString(now.getFullYear())
+    const month = formatString(now.getMonth() + 1)
+    const day = formatString(now.getDate())
+    const hours = formatString(now.getHours())
+    const minutes = formatString(now.getMinutes())
+
+    return `${year}/${month}/${day} ${hours}:${minutes}`
   }
 
   const sendMessage = async () => {
-    await socket.emit('SEND_MESSAGE', {
-      userId: socket.id,
-      userName: username,
-      messageContent: message,
-      dateTime: new Date(),
-      path: location,
-    })
-
-    setMessage('')
+    if (message.trim()) {
+      await socket.emit('SEND_MESSAGE', {
+        userId: socket.id,
+        userName: username,
+        messageContent: message.trim(),
+        dateTime: getDateTime(),
+        path: location,
+      })
+  
+      setMessage('')
+    }
   }
 
   const handleEnter = (event) => {
@@ -36,7 +49,7 @@ const FooterEditor = () => {
   return(
     <section className='editor'>
       <textarea
-        // contentEditable
+        rows={3}
         value={message}
         onChange={handleChange}
         onKeyPress={handleEnter}

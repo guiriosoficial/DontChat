@@ -7,11 +7,13 @@ import './style.scss'
 const History = () => {
   const messages = useSelector(({ messages }) => messages)
   const socket = useContext(SocketContext)
+  const messageRef = useRef(null)
   const dispatch = useDispatch()
 
   useEffect(() => {
     socket.on('RECIVE_MESSAGE', (message) => {
       dispatch(updateMessages(message))
+      messageRef.current.scrollIntoView({ behavior: 'smooth' });
     })
   }, [socket])
 
@@ -20,7 +22,7 @@ const History = () => {
       <ul>
         {
           messages.map(({ userId, userName, messageContent, dateTime }, index) => (
-            <li key={index}>
+            <li key={index} ref={messageRef}>
               [{dateTime}]&nbsp;
               <b>
                 {userName}

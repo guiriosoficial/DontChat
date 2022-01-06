@@ -5,13 +5,24 @@ import { changeUsername } from '../../store/username'
 import SocketContext from '../../plugins/socket'
 import History from '../../components/history'
 import Editor from '../../components/editor'
-import io from 'socket.io-client'
 import './style.scss'
 
 const Chat = () => {
+  const [error, setError] = useState('')
+  const username = useSelector(({ username }) => username)
   const location = useLocation().pathname
   const socket = useContext(SocketContext)
   const dispatch = useDispatch()
+
+  const changeNickname = () => {
+    const nickname = prompt('Please, insert a nickname (cannot be empty or longer than 30 characters):')
+
+    if (!nickname.trim() || nickname.trim().length > 30) {
+      changeNickname()
+    } else if (nickname) {
+      dispatch(changeUsername(nickname.trim()))
+    }
+  }
   
   const joinPath = () => {
     socket.emit('JOIN_PATH', location)
@@ -21,20 +32,30 @@ const Chat = () => {
     socket.emit('LEAVE_PATH', location)
   }
 
-  const changeUsername = () => {
-    setUsername(prompt('Insert your nickname: '))
+  const socketStatus = () => {
+    socket.on('connect', () => {
+      setError('')
+      joinPath()
+    })
+    socket.on('disconnect', () => {
+      setError('Not Connected. Trying to reconnect.')
+      leavePath()
+    })
   }
-  
+
   useEffect(() => {
-    changeUsername()
+    if (!username) changeNickname()
     joinPath()
+    socketStatus()
     return () => leavePath()
-  }, [location])
+  }, [location, socket])
 
   return(
     <main className='chat'>
-      <History socket={socket} />
-      <Editor socket={socket} location={location} username={username} />
+      {error && <div className='chat__error'>{error}</div>}
+      <History />
+      <span>&nbsp;Click <a href='#' onClick={changeNickname}>here</a> to change your nickname!</span>
+      <Editor />
     </main>
   )
 }
