@@ -27,13 +27,13 @@ const Home = () => {
       <section>
         Dont login, just use a URL
         <br />
-        Dont save any history
+        Dont save any message or chat history
         <br />
-        Dont be identified
+        Dont pass any personal information
         <br />
-        Dont lose your content, download with YourURL.zip
+        Dont lose your conversation, download with YourURL.zip
         <br />
-        Dont forget, you can use yourURL/yourChat/yourSubChat
+        Dont forget, you can change your nickname whenever you want
         <br />
         Dontchat!
       </section>
