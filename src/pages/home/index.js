@@ -10,32 +10,28 @@ const Home = () => {
   return(
     <main className='home'>
       <h1>DONTCHAT</h1>
-      <form>
+      <form onSubmit={() => navigate(path)}>
         <label htmlFor='path'>www.dontchat.com/</label>
         &nbsp;
         <input
+          value={path}
           type='text'
           id='path'
-          value={path}
+          name='path'
+          autoCapitalize='off'
+          autoCorrect='off'
           onChange={handleChange}
-          autoCapitalize="off"
-          autoCorrect="off"
         />
         &nbsp;
-        <button onClick={() => navigate(path)}>Go!</button>
+        <button type='submit'>Go!</button>
       </form>
       <section>
-        Dont login, just use a URL
-        <br />
-        Dont save any message or chat history
-        <br />
-        Dont pass any personal information
-        <br />
-        Dont lose your conversation, download with YourURL.zip
-        <br />
-        Dont forget, change your nickname whenever you want
-        <br />
-        Dontchat!
+        Dont login, just use a URL<br />
+        Dont save any message or chat history<br />
+        Dont pass any personal information<br />
+        Dont lose your conversation, download with YourURL.zip<br />
+        Dont forget, change your nickname whenever you want<br />
+        Dontchat!<br />
       </section>
     </main>
   )
