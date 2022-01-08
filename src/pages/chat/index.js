@@ -24,21 +24,17 @@ const Chat = () => {
   }
   
   const joinPath = () => {
-    socket.emit('JOIN_PATH', location)
-  }
-  
-  const leavePath = () => {
-    socket.emit('LEAVE_PATH', location)
+    if (username) {
+      socket.emit('JOIN_PATH', location, username)
+    }
   }
 
   const socketStatus = () => {
     socket.on('connect', () => {
       setError('')
-      joinPath()
     })
     socket.on('disconnect', () => {
       setError('Not Connected. Trying to reconnect.')
-      leavePath()
     })
   }
 
@@ -46,17 +42,16 @@ const Chat = () => {
     if (!username) changeNickname()
     joinPath()
     socketStatus()
-    return () => leavePath()
-  }, [location, socket])
+  }, [location ,socket.connected])
 
   return(
     <SocketContext.Provider value={socket}>
-    <main className='chat'>
-      {error && <div className='chat__error'>{error}</div>}
-      <History />
-      <span>&nbsp;Click <a href='#' onClick={changeNickname}>here</a> to change your nickname!</span>
-      <Editor />
-    </main>
+      <main className='chat'>
+        {error && <div className='chat__error'>{error}</div>}
+        <History />
+        <span>&nbsp;Click <a href='#' onClick={changeNickname}>here</a> to change your nickname!</span>
+        <Editor />
+      </main>
     </SocketContext.Provider>
   )
 }
