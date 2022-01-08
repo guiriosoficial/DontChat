@@ -1,3 +1,4 @@
+import React from 'react'
 import {
   BrowserRouter as Router,
   Routes,
@@ -11,7 +12,7 @@ const App = () => {
     <Router>
       <Routes>
         <Route element={<Home />} path='/' exact />
-        <Route element={<Chat />} path='/:url/*' />
+        <Route element={<Chat />} path='/*' />
       </Routes>
     </Router>
   )
