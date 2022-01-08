@@ -9,10 +9,7 @@ const FooterEditor = () => {
 
   const sendMessage = async () => {
     if (message.trim()) {
-      await socket.emit('SEND_MESSAGE', {
-        messageContent: message.trim(),
-      })
-  
+      await socket.emit('SEND_MESSAGE', message.trim())
       setMessage('')
     }
   }
