@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './style.scss'
 
@@ -33,7 +33,7 @@ const Home = () => {
         <br />
         Dont lose your conversation, download with YourURL.zip
         <br />
-        Dont forget, you can change your nickname whenever you want
+        Dont forget, change your nickname whenever you want
         <br />
         Dontchat!
       </section>
