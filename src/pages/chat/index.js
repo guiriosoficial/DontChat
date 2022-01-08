@@ -1,8 +1,8 @@
-import { useEffect, useContext, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { changeUsername } from '../../store/username'
-import SocketContext from '../../plugins/socket'
+import SocketContext, { socket } from '../../plugins/socket'
 import History from '../../components/history'
 import Editor from '../../components/editor'
 import './style.scss'
@@ -11,7 +11,6 @@ const Chat = () => {
   const [error, setError] = useState('')
   const username = useSelector(({ username }) => username)
   const location = useLocation().pathname
-  const socket = useContext(SocketContext)
   const dispatch = useDispatch()
 
   const changeNickname = () => {
@@ -51,12 +50,14 @@ const Chat = () => {
   }, [location, socket])
 
   return(
+    <SocketContext.Provider value={socket}>
     <main className='chat'>
       {error && <div className='chat__error'>{error}</div>}
       <History />
       <span>&nbsp;Click <a href='#' onClick={changeNickname}>here</a> to change your nickname!</span>
       <Editor />
     </main>
+    </SocketContext.Provider>
   )
 }
 
