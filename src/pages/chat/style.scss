@@ -22,13 +22,13 @@ body {
     font-weight: bold;
   }
 
-  span {
+  & > span {
     font-size: 14px;
     margin: 0 10px;
 
     a {
       color: #1B699F;
       text-decoration: none;
-      }
+    }
   }
 }
