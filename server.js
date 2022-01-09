@@ -2,6 +2,8 @@ const { Server } = require('socket.io')
 const express = require('express')
 const app = express()
 
+const db = require('./db')
+
 const cors = require('cors')
 app.use(cors())
 
@@ -22,17 +24,26 @@ io.on('connect', (socket) => {
 
     const findClient = () => clientsList.find(client => client.userId === userId)
 
-    const sendMessage = (messageContent, messageType) => {
+    const sendMessage = async (messageContent, messageType) => {
         const { userName, userColor, roomPath } = findClient()
 
-        io.in(roomPath).emit('RECIVE_MESSAGE', {
+        const messageData = {
             userId,
             userName,
             userColor,
             messageType,
             messageContent,
             dateTime: new Date(),
-        })
+        }
+
+        try {
+            const dbmessage = await db.pushMessage(messageData)
+            console.log(dbmessage)
+        } catch (error) {
+            console.error(error)
+        }
+
+        io.in(roomPath).emit('RECIVE_MESSAGE', messageData)
     }
 
     socket.on('CHANGE_USERNAME', (userName) => {
@@ -44,11 +55,18 @@ io.on('connect', (socket) => {
         }
     })
 
-    socket.on('JOIN_PATH', (roomPath, userName) => {
+    socket.on('JOIN_PATH', async (roomPath, userName) => {
         leavPath()
 
         if (userName?.trim() && userName?.trim().length < 30) {
             socket.join(roomPath)
+
+            try {
+                const dbmessages = await db.getMessages(roomPath)
+                console.log(dbmessages)
+            } catch (error) {
+                console.error(error)
+            }
     
             clientsList.push({
                 userId,
