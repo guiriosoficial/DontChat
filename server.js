@@ -1,24 +1,20 @@
-const { Server } = require('socket.io')
 const express = require('express')
+const { createServer } = require('http')
+const { Server } = require('socket.io')
+
 const app = express()
-
-const db = require('./db')
-
-const cors = require('cors')
-app.use(cors())
-
-const server = require('http').createServer(app)
-
-const io = new Server(server, {
+const httpServer = createServer(app)
+const io = new Server(httpServer, {
     cors: {
-        origin: 'http://localhost:3000',
-        methods: ['GET', 'POST']
+        origin: 'http://localhost:3000'
     }
 })
 
+const db = require('./db')
+
 const clientsList = []
 
-io.on('connect', (socket) => {
+io.on('connection', (socket) => {
     const userId = socket.id
     console.log('connected', userId)
 
