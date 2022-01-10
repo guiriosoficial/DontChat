@@ -5,7 +5,7 @@ import './style.scss'
 const FooterEditor = () => {
   const socket = useContext(SocketContext)
   const [message, setMessage] = useState('')
-  const handleChange = event => setMessage(event.target.value)
+  const handleChange = (event) => setMessage(event.target.value)
 
   const sendMessage = async () => {
     if (message.trim()) {
@@ -23,8 +23,8 @@ const FooterEditor = () => {
     }
   }
 
-  return(
-    <section className='editor'>
+  return (
+    <section className="editor">
       <textarea
         rows={3}
         value={message}
@@ -32,7 +32,12 @@ const FooterEditor = () => {
         onKeyPress={handleEnter}
       />
       &nbsp;
-      <button onClick={sendMessage}>Send!</button>
+      <button
+        type="submit"
+        onClick={sendMessage}
+      >
+        Send!
+      </button>
     </section>
   )
 }

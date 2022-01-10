@@ -8,14 +8,14 @@ import Home from '../pages/home/index'
 import Chat from '../pages/chat/index'
 
 const App = () => {
-  return(
+  return (
     <Router>
       <Routes>
-        <Route element={<Home />} path='/' exact />
-        <Route element={<Chat />} path='/*' />
+        <Route element={<Home />} path="/" exact />
+        <Route element={<Chat />} path="/*" />
       </Routes>
     </Router>
   )
 }
 
-export default App;
+export default App

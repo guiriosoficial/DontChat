@@ -13,21 +13,19 @@ const Chat = () => {
   const roomPath = useLocation().pathname
   const dispatch = useDispatch()
 
-  const serUsername = (isChanging = false) => {
+  const setUsername = (isChanging = false) => {
     if (!userName || isChanging) {
       const nickname = prompt('Please, insert a nickname (cannot be empty or longer than 30 characters):')
-  
+
       if (nickname && nickname?.trim() && nickname.trim()?.length < 30) {
         dispatch(changeUsername(nickname.trim()))
         if (isChanging) socket.emit('CHANGE_USERNAME', nickname)
-      } else if (nickname === null && userName) {
-  
-      } else {
-        serUsername()
+      } else if (!nickname && !userName) {
+        setUsername()
       }
     }
   }
-  
+
   const joinPath = () => {
     if (userName) {
       socket.emit('JOIN_PATH', roomPath, userName)
@@ -36,7 +34,7 @@ const Chat = () => {
 
   const invalidName = () => {
     socket.on('CHANGE_USERNAME', () => {
-      serUsername(true)
+      setUsername(true)
     })
   }
 
@@ -50,22 +48,22 @@ const Chat = () => {
   }
 
   useEffect(() => {
-    serUsername()
+    setUsername()
     joinPath()
     socketStatus()
     invalidName()
-  }, [roomPath ,socket.connected])
+  }, [roomPath, socket.connected])
 
-  return(
+  return (
     <SocketContext.Provider value={socket}>
-      <main className='chat'>
-        {errorMessage && <div className='chat__error'>{errorMessage}</div>}
+      <main className="chat">
+        {errorMessage && <div className="chat__error">{errorMessage}</div>}
         <History />
-        <span>&nbsp;Click <a href='#' onClick={() => serUsername(true)}>here</a> to change your nickname!</span>
+        <span>&nbsp;Click <a href='#' onClick={() => setUsername(true)}>here</a> to change your nickname!</span>
         <Editor />
       </main>
     </SocketContext.Provider>
   )
 }
 
-export default Chat;
+export default Chat

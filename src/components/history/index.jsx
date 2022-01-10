@@ -29,13 +29,13 @@ const History = () => {
     })
   }, [socket])
 
-  return(
-    <section className='history'>
+  return (
+    <section className="history">
       <ul>
         {
           messages.map(({ userId, userName, userColor, messageContent, dateTime, messageType }, index) => (
             <li key={index} ref={messageRef}>
-              <span style={{color: userColor}}>
+              <span style={{ color: userColor }}>
                 [{getDateTime(dateTime)}]&nbsp;
                 <b>
                   {userName}

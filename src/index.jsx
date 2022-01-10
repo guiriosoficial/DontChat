@@ -12,4 +12,4 @@ render(
     </Provider>
   </StrictMode>,
   document.getElementById('root')
-);
+)
