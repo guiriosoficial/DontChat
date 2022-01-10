@@ -32,12 +32,12 @@ io.on('connection', (socket) => {
             dateTime: new Date(),
         }
 
-        try {
-            const dbmessage = await db.pushMessage(messageData)
-            console.log(dbmessage)
-        } catch (error) {
-            console.error(error)
-        }
+        // try {
+        //     const dbmessage = await db.pushMessage(messageData)
+        //     console.log(dbmessage)
+        // } catch (error) {
+        //     console.error(error)
+        // }
 
         io.in(roomPath).emit('RECIVE_MESSAGE', messageData)
     }
@@ -57,12 +57,12 @@ io.on('connection', (socket) => {
         if (userName?.trim() && userName?.trim().length < 30) {
             socket.join(roomPath)
 
-            try {
-                const dbmessages = await db.getMessages(roomPath)
-                console.log(dbmessages)
-            } catch (error) {
-                console.error(error)
-            }
+            // try {
+            //     const dbmessages = await db.getMessages(roomPath)
+            //     console.log(dbmessages)
+            // } catch (error) {
+            //     console.error(error)
+            // }
     
             clientsList.push({
                 userId,
@@ -126,6 +126,6 @@ const generateColor = (roomPath) => {
     }
 }
 
-server.listen(3001, () => {
+httpServer.listen(3001, () => {
     console.log('Server is Running on Port 3001...')
 })
