@@ -1,25 +1,30 @@
-module.exports = {
-    "env": {
-        "browser": true,
-        "es2021": true
-    },
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended",
-        "airbnb"
-    ],
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 13,
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react"
-    ],
-    "rules": {
-        "semi": [2, "never"],
-        "comma-dangle": ["error", "never"],
-    }
-};
+// module.exports = {
+//     "env": {
+//         "browser": true,
+//         "es2021": true
+//     },
+//     "extends": [
+//         "eslint:recommended",
+//         "plugin:react/recommended",
+//         "airbnb"
+//     ],
+//     "parserOptions": {
+//         "ecmaFeatures": {
+//             "jsx": true
+//         },
+//         "ecmaVersion": 13,
+//         "sourceType": "module"
+//     },
+//     "plugins": [
+//         "react"
+//     ],
+//     "rules": {
+//         "semi": [2, "never"],
+//         "comma-dangle": ["error", "never"],
+//         "jsx-a11y/label-has-associated-control": ["error", {
+//             "required": {
+//               "some": ["nesting", "id"]
+//             }
+//         }],
+//     }
+// };
