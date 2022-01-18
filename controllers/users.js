@@ -90,7 +90,7 @@ async function leaveRoomPath(socket) {
 
         socket.leave(roomPath)
         // await MessagesController.sendMessage('Left room', 'log', userId)
-        console.log(`User ${socketId} left ${roomPath}`);
+        console.log(`User ${socketId} left ${roomPath}`)
     } else {
         console.error('Error on leave room', `User ${socketId} dose not exists`)
     }
@@ -110,7 +110,7 @@ async function joinRoomPath(socket, roomPath) {
 
         socket.join(roomPath)
         // await MessagesController.sendMessage('Joined room', 'log', userId)
-        console.log(`User ${socketId} joined ${roomPath}`);
+        console.log(`User ${socketId} joined ${roomPath}`)
     } else {
         console.error('Error on join room', `User ${socketId} dose not exists`)
     }

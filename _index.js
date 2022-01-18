@@ -8,7 +8,7 @@ const app = express()
 app.set('etag', false)
 app.use(cors())
 app.use(express.json())
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }))
 const httpServer = createServer(app)
 
 const messagesRouter = require('./routes/messages')

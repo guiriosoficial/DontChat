@@ -4,7 +4,6 @@ const MessagesSchema = new Schema({
     socketId: {
         type: String,
         required: true,
-        unique: true
     },
     userName: {
         type: String,
