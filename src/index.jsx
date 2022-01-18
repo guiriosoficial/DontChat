@@ -5,11 +5,13 @@ import App from './routes'
 import store from './store'
 import './styles/main.scss'
 
+const rootNode = document.getElementById('root')
+
 render(
   <StrictMode>
     <Provider store={store}>
       <App />
     </Provider>
   </StrictMode>,
-  document.getElementById('root')
+  rootNode
 )
