@@ -4,10 +4,10 @@ import {
   Routes,
   Route
 } from 'react-router-dom'
-import Home from '../pages/home/index'
-import Chat from '../pages/chat/index'
+import Home from './pages/home'
+import Chat from './pages/chat'
 
-const App = () => {
+function App() {
   return (
     <Router>
       <Routes>
