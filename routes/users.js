@@ -2,7 +2,7 @@ const router = require("express").Router()
 
 const UsersController = require('../controllers/users')
 
-router.post('/:socketId', UsersController.createUser)
+router.post('/:socketId', UsersController.setUser)
 router.patch('/:socketId', UsersController.updateUser)
 
 
