@@ -1,24 +1,25 @@
 import React, { useState, useContext } from 'react'
-import SocketContext from '../../plugins/socket'
-import './style.scss'
+import SocketContext from '../../socket'
+import './editor.scss'
 
-const FooterEditor = () => {
+function FooterEditor() {
   const socket = useContext(SocketContext)
   const [message, setMessage] = useState('')
-  const handleChange = (event) => setMessage(event.target.value)
+  const handleChangeMessage = (evt) => setMessage(evt.target.value)
 
-  const sendMessage = async () => {
+  const sendMessage = () => {
     if (message.trim()) {
-      await socket.emit('SEND_MESSAGE', message.trim())
-      setMessage('')
+      socket.emit('sendMessage', message.trim(), () => {
+        setMessage('')
+      })
     }
   }
 
-  const handleEnter = (event) => {
-    const { which, ctrlKey } = event
+  const handleEnter = (evt) => {
+    const { which, ctrlKey } = evt
 
     if (which === 13 && !ctrlKey) {
-      event.preventDefault()
+      evt.preventDefault()
       sendMessage()
     }
   }
@@ -28,7 +29,7 @@ const FooterEditor = () => {
       <textarea
         rows={3}
         value={message}
-        onChange={handleChange}
+        onChange={handleChangeMessage}
         onKeyPress={handleEnter}
       />
       &nbsp;
