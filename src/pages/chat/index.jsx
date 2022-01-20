@@ -3,7 +3,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { setUser } from '../../store/user'
 import { setMessages } from '../../store/messages'
-import getNewColor from '../../utils/getNewColor'
+import { 
+  generateColor,
+  generateName,
+  validateColor,
+  validateName
+} from '../../utils'
 import SocketContext, { socket } from '../../socket'
 import History from './history'
 import Editor from './editor'
@@ -11,54 +16,61 @@ import axios from 'axios'
 import './history.scss'
 
 function Chat() {
-  const [userColor, setUserColor] = useState(getNewColor())
-  const [errorMessage, setErrorMessage] = useState('')
-  const { user } = useSelector((state) => state)
-  const roomPath = useLocation().pathname
   const dispatch = useDispatch()
-  const handleChangeUserColor = (evt) => {
-    setUserColor(evt.target.value)
-    patchUser()
-  }
+  const roomPath = useLocation().pathname
+  const { user } = useSelector((state) => state)
+  const [userColor, setUserColor] = useState(user.userColor || generateColor())
+  const [errorMessage, setErrorMessage] = useState('')
 
-  const setUserName = async (isChanging = false) => {
-    if (!user._id || isChanging) {
-      const nickName = prompt('Please, insert a nickname (cannot be empty or longer than 30 characters):')
-      if (nickName && nickName?.trim() && nickName.trim()?.length < 30) {
-        isChanging ? await patchUser(nickName) : await postUser(nickName)
-      } else if (!nickName && !user.userName) {
-        setUserName()
-      }
+  const invalidNameMessage = 'Invalid name. Cannot be shorter than 3 or longer than 27 characters.'
+  const invalidColorMessage = 'Invalid color. Select a darker color.'
+
+  const handleChangeUserColor = async (evt) => {
+    const newColor = evt.target.value
+    
+    if (validateColor(newColor) && newColor !== user.userColor) {
+      setUserColor(newColor)
+      await putUser()
     } else {
-      await postUser(user.userName)
+      showErrorMessage(invalidColorMessage)
     }
   }
 
-  const postUser = async (nickName) => {
-    await axios.post(`http://localhost:3001/users/${socket.id}?roomPath=${roomPath}`, {
-      userName: nickName.trim(),
-      userColor,
-    })
-      .then(({ data }) => dispatch(setUser(data)))
-      // .catch((_error) => setUserName())
+  const handleChangeUserName = async () => {
+    const nickName = prompt('Please, insert a nickname:')
+
+    if (validateName(nickName) && nickName !== userName) {
+      await putUser(nickName)
+    } else if (nickName) {
+      showErrorMessage(invalidNameMessage)
+    }
   }
 
-  const patchUser = async (nickName = '') => {
-    await axios.patch(`http://localhost:3001/users/${socket.id}?roomPath=${roomPath}`, {
-      userName: nickName.trim() || user.userName,
-      userColor,
+  const putUser = async (nickName = '') => {
+    await axios.put(`http://localhost:3001/users/${socket.id}?roomPath=${roomPath}`, {
+      userName: nickName.trim() || user.userName || generateName(),
+      userColor
     })
       .then(({ data }) => dispatch(setUser(data)))
-      // .catch((_error) => setUserName())
+      .catch(({ response: { data } }) => showErrorMessage(data))
   }
 
   const joinRoomPath = () => {
-    if (user._id) {
-      socket.emit('joinRoomPath', roomPath)
+    if (user.socketId) {
+      socket.emit('joinRoomPath', roomPath, (res) => {
+        showErrorMessage(res)
+      })
     }
   }
 
-  const socketStatus = () => {
+  const showErrorMessage = (message) => {
+    setErrorMessage(message)
+    setTimeout(() => {
+      setErrorMessage('')
+    }, 5000)
+  }
+
+  const updateSocketStatus = () => {
     socket.on('connect', () => {
       setErrorMessage('')
     })
@@ -67,33 +79,37 @@ function Chat() {
     })
   }
 
-  useEffect(async() => {
+  useEffect(async() => {  
     setTimeout(async() => {
-      await setUserName()
+      await putUser()
   
       await axios.get(`http://localhost:3001/messages?roomPath=${roomPath}`)
         .then(({ data }) => dispatch(setMessages(data)))
-        .catch((error) => console.error(error))
+        .catch(({ response: { data }}) => setErrorMessage(data))
   
       joinRoomPath()
 
-      return () => socket.off('joinRoomPath', roomPath, user._id)
+      return () => socket.off('joinRoomPath', roomPath)
     }, 300)
   }, [])
     
   useEffect(() => {
     // joinRoomPath()
-    socketStatus()
+    updateSocketStatus()
   }, [socket.connected])
 
   return (
     <SocketContext.Provider value={socket}>
       <main className="chat">
-        {errorMessage && <div className="chat__error">{errorMessage}</div>}
+        {errorMessage && <div className="error">{errorMessage}</div>}
         <History />
         <span>
-          Click <a href="#" onClick={() => setUserName(true)}>here</a> to change your nickname!
-          <input type="color" value={userColor} onChange={handleChangeUserColor}/>
+          Click <a href="#" onClick={handleChangeUserName}>here</a> to change your nickname!
+          <input
+            value={userColor}
+            type="color"
+            onChange={handleChangeUserColor}
+          />
         </span>
         <Editor />
       </main>

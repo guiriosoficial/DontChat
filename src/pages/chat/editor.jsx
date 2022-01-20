@@ -9,8 +9,8 @@ function FooterEditor() {
 
   const sendMessage = () => {
     if (message.trim()) {
-      socket.emit('sendMessage', message.trim(), () => {
-        setMessage('')
+      socket.emit('sendMessage', message.trim(), (res) => {
+        if (res) setMessage('')
       })
     }
   }

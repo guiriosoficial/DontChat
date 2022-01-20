@@ -1,18 +1,18 @@
 import React, { useEffect, useContext, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateMessages } from '../../store/messages'
-import formatDateTime from '../../utils/formatDateTime'
+import { formatDateTime } from '../../utils'
 import SocketContext from '../../socket'
 import './style.scss'
 
 function History() {
   const socket = useContext(SocketContext)
   const dispatch = useDispatch()  
-  const { messages, user } = useSelector((store) => store)
+  const { messages } = useSelector((store) => store)
   const messageRef = useRef(null)
 
   useEffect(() => {
-    socket.on('receveMessage', (message) => {
+    socket.on('reciveMessage', (message) => {
       dispatch(updateMessages(message))
       messageRef.current.scrollIntoView({ behavior: 'smooth' })
     })
@@ -45,7 +45,7 @@ function History() {
               {
                 messageType === 'message'
                   ? messageContent
-                  : <i>{messageContent}</i>
+                  : <i dangerouslySetInnerHTML={{__html: messageContent}} />
               }
             </li>
           ))

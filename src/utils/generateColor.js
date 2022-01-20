@@ -1,8 +1,8 @@
-function getNewColor() {
-    const getNewNumber = () => Math.random() * 255
-    let r = getNewNumber()
-    let g = getNewNumber()
-    let b = getNewNumber()
+function generateColor() {
+    const generateNumber = () => Math.random() * 255
+    let r = generateNumber()
+    let g = generateNumber()
+    let b = generateNumber()
 
     const c = ((r * 0.299 + g * 0.587 + b * 0.114) / 255) - 0.6
 
@@ -17,4 +17,4 @@ function getNewColor() {
     return `#${rgbToHexa(r)}${rgbToHexa(g)}${rgbToHexa(b)}`
 }
 
-export default getNewColor
+export default generateColor

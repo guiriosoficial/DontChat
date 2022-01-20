@@ -1,4 +1,5 @@
-function validateUserColor(userColor) {
+function validateColor(userColor) {
+  try {
     const c = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(userColor)
     const r = parseInt(c[1], 16)
     const g = parseInt(c[2], 16)
@@ -9,4 +10,9 @@ function validateUserColor(userColor) {
     if (q > 0) {
       return false
     } return true
+  } catch {
+    return false
+  }
 }
+
+export default validateColor
