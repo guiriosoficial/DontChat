@@ -23,11 +23,13 @@ const io = new Server(httpServer, {
     }
 })
 
+global.io = io
+
 const UsersEvents = require('./events/users')
 const MessagesEvents = require('./events/messages')
 io.use(UsersEvents.joinRoomPath)
-// io.use(MessagesEvents.sendMessage)
-io.use(UsersEvents.joinRoomPath)
+io.use(MessagesEvents.sendMessage)
+io.use(UsersEvents.disconnect)
 
 io.on('connection', (socket) => {
     console.log(`User ${socket.id} connected`)
@@ -43,3 +45,5 @@ connect('mongodb://localhost:27017/dontchat')
     .catch(err => {
         console.error('Faild to connect with MongoDB', err)
     })
+
+    

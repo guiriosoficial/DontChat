@@ -11,7 +11,7 @@ function io(httpServer) {
     })
 
     io.use(UsersEvents.joinRoomPath)
-    // io.use(MessagesEvents.sendMessage)
+    io.use(MessagesEvents.sendMessage)
     io.use(UsersEvents.disconnect)
     
     io.on('connection', (socket) => {

@@ -1,8 +1,10 @@
 const UsersController = require('../controllers/users')
 
 function joinRoomPath(socket, next) {
-    socket.on('joinRoomPath', (roomPath) => {
+    socket.on('joinRoomPath', (roomPath, callback) => {
         UsersController.joinRoomPath(socket, roomPath)
+            .then(() => callback(''))
+            .catch(() => callback('Faild to join the room.'))
     })
 
     next()

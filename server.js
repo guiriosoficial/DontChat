@@ -3,7 +3,8 @@ const app = require('./app')
 const db = require('./db')
 
 const httpServer = createServer(app)
-require('./io')(httpServer)
+const io = require('./io')(httpServer)
+global.io = io
 
 db
     .then(() => {
@@ -14,3 +15,4 @@ db
     .catch(err => {
         console.error('Faild to start http server!', err)
     })
+

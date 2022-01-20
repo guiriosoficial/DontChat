@@ -1,6 +1,5 @@
 const Messages = require('../models/messages')
 const Users = require('../models/users')
-// const io = require('../io')
 
 function getMessages(req, res) {
     const { roomPath } = req.query
@@ -15,12 +14,12 @@ function getMessages(req, res) {
         })
 }
 
-async function sendMessage(messageContent, messageType, userId) {
-    const userData = await Users.findOne({ userId })
+async function sendMessage(messageContent, messageType, socketId) {
+    const userData = await Users.findOne({ socketId })
     const { userName, userColor, roomPath } = userData
     
     const newMessage = new Messages({
-        userId,
+        socketId,
         userName,
         userColor,
         messageType,
@@ -31,7 +30,7 @@ async function sendMessage(messageContent, messageType, userId) {
     newMessage.save()
         .then(result => {
             const { roomPath } = result
-            // io.in(roomPath).emit('reciveMessage', result)
+            global.io.in(roomPath).emit('reciveMessage', result)
         })
         .catch(err => {
             console.error(err)
