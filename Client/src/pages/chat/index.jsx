@@ -39,7 +39,7 @@ function Chat() {
   const handleChangeUserName = async () => {
     const nickName = prompt('Please, insert a nickname:')
 
-    if (validateName(nickName) && nickName !== userName) {
+    if (validateName(nickName) && nickName !== user.userName) {
       await putUser(nickName)
     } else if (nickName) {
       showErrorMessage(invalidNameMessage)
