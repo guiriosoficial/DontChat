@@ -22,8 +22,6 @@ function Chat() {
   const [userColor, setUserColor] = useState(user.userColor || generateColor())
   const [errorMessage, setErrorMessage] = useState('')
 
-  const invalidNameMessage = 'Invalid name. Cannot be shorter than 3 or longer than 27 characters.'
-  const invalidColorMessage = 'Invalid color. Select a darker color.'
 
   const handleChangeUserColor = async (evt) => {
     const newColor = evt.target.value
@@ -32,7 +30,7 @@ function Chat() {
       setUserColor(newColor)
       await putUser()
     } else {
-      showErrorMessage(invalidColorMessage)
+      showErrorMessage('Invalid color. Select a darker color.')
     }
   }
 
@@ -42,24 +40,7 @@ function Chat() {
     if (validateName(nickName) && nickName !== user.userName) {
       await putUser(nickName)
     } else if (nickName) {
-      showErrorMessage(invalidNameMessage)
-    }
-  }
-
-  const putUser = async (nickName = '') => {
-    await axios.put(`http://localhost:3001/users/${socket.id}?roomPath=${roomPath}`, {
-      userName: nickName.trim() || user.userName || generateName(),
-      userColor
-    })
-      .then(({ data }) => dispatch(setUser(data)))
-      .catch(({ response: { data } }) => showErrorMessage(data))
-  }
-
-  const joinRoomPath = () => {
-    if (user.socketId) {
-      socket.emit('joinRoomPath', roomPath, (res) => {
-        showErrorMessage(res)
-      })
+      showErrorMessage('Invalid name. Cannot be shorter than 3 or longer than 27 characters.')
     }
   }
 
@@ -70,32 +51,47 @@ function Chat() {
     }, 5000)
   }
 
-  const updateSocketStatus = () => {
+  const putUser = async (nickName = '') => {
+    await axios.put(`http://localhost:3001/users/${socket.id}?roomPath=${roomPath}`, {
+      userName: nickName.trim() || user.userName || generateName(),
+      userColor
+    })
+      .then(({ data }) => dispatch(setUser(data)))
+      .catch(({ response: { data }}) => setErrorMessage(data))
+  }
+
+  const getMessages = async () => {
+    await axios.get(`http://localhost:3001/messages?roomPath=${roomPath}`)
+      .then(({ data }) => dispatch(setMessages(data)))
+      .catch(({ response: { data }}) => setErrorMessage(data))
+  }
+
+  const joinRoomPath = () => {
+    if (user.socketId) {
+      socket.emit('joinRoomPath', roomPath, (res) => {
+        setErrorMessage(res)
+      })
+    }
+  }
+
+  useEffect(() => {
+    setTimeout(async() => {
+      await getMessages()
+      await putUser()
+      joinRoomPath()
+
+    }, 300)
+    return () => socket.off('joinRoomPath', roomPath)
+  }, [])
+    
+  useEffect(() => {
+    // joinRoomPath()
     socket.on('connect', () => {
       setErrorMessage('')
     })
     socket.on('disconnect', () => {
       setErrorMessage('Not Connected. Trying to reconnect.')
     })
-  }
-
-  useEffect(async() => {  
-    setTimeout(async() => {
-      await putUser()
-  
-      await axios.get(`http://localhost:3001/messages?roomPath=${roomPath}`)
-        .then(({ data }) => dispatch(setMessages(data)))
-        .catch(({ response: { data }}) => setErrorMessage(data))
-  
-      joinRoomPath()
-
-      return () => socket.off('joinRoomPath', roomPath)
-    }, 300)
-  }, [])
-    
-  useEffect(() => {
-    // joinRoomPath()
-    updateSocketStatus()
   }, [socket.connected])
 
   return (
@@ -104,7 +100,14 @@ function Chat() {
         {errorMessage && <div className="error">{errorMessage}</div>}
         <History />
         <span>
-          Click <a href="#" onClick={handleChangeUserName}>here</a> to change your nickname!
+          Click&nbsp;
+          <a
+            href="#"
+            onClick={handleChangeUserName}
+          >
+            here
+          </a>
+          &nbsp;to change your nickname!
           <input
             value={userColor}
             type="color"
