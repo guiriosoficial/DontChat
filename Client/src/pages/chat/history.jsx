@@ -7,16 +7,16 @@ import './style.scss'
 
 function History() {
   const socket = useContext(SocketContext)
-  const dispatch = useDispatch()  
-  const { messages } = useSelector((store) => store)
+  const dispatch = useDispatch()
   const messageRef = useRef(null)
+  const { messages } = useSelector((store) => store)
 
   useEffect(() => {
     socket.on('reciveMessage', (message) => {
       dispatch(updateMessages(message))
       messageRef.current.scrollIntoView({ behavior: 'smooth' })
     })
-  }, [socket])
+  }, [dispatch, socket])
 
   return (
     <section className="history">
@@ -31,7 +31,10 @@ function History() {
             messageType,
             dateTime
           }) => (
-            <li key={_id} ref={messageRef}>
+            <li
+              key={_id}
+              ref={messageRef}
+            >
               <span style={{ color: userColor }}>
                 {`[${formatDateTime(dateTime)}]`}
                 &nbsp;

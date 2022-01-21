@@ -11,7 +11,9 @@ function Home() {
     <main className="home">
       <h1>DONTCHAT</h1>
       <form onSubmit={() => navigate(roomPath)}>
-        <label htmlFor="roomPath">www.dontchat.com/</label>
+        <label htmlFor="roomPath">
+          www.dontchat.com/
+        </label>
         &nbsp;
         <input
           value={roomPath}
@@ -23,7 +25,9 @@ function Home() {
           onChange={handleChangeRoomPath}
         />
         &nbsp;
-        <button type="submit">Go!</button>
+        <button type="submit">
+          Go!
+        </button>
       </form>
       <section>
         Dont login, just use a URL<br />
