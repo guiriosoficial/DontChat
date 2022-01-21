@@ -1,9 +1,14 @@
-function validateName(nickName) {
-  const trimNickName = nickName?.trim()
-
-  if (trimNickName?.length > 2 && trimNickName?.length < 28) {
-    return true
-  } return false
+function validateName(nickName = '') {
+  try {
+    const trimNickName = nickName?.trim()
+    const nickNameLength = trimNickName?.length
+  
+    if (nickNameLength > 2 && nickNameLength < 28) {
+      return true
+    } return false
+  } catch {
+    return false
+  }
 }
 
 export default validateName

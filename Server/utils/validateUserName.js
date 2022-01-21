@@ -1,7 +1,12 @@
-function validateUserName(userName) {
-    const trimUserName = userName?.trim()
-
-    return trimUserName?.length > 2 && trimUserName?.length < 28
+function validateUserName(userName = '') {
+    try {
+        const trimUserName = userName?.trim()
+        const userNameLength = trimUserName?.length
+    
+        return userNameLength > 2 && userNameLength < 28
+    } catch {
+        return false
+    }
 }
 
 module.exports = validateUserName

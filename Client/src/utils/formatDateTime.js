@@ -1,4 +1,4 @@
-function formatDateTime(dateTime) {
+function formatDateTime(dateTime = new Date()) {
   const formatString = (value) => String(value).padStart(2, '0')
   const now = new Date(dateTime)
   const year = formatString(now.getFullYear())

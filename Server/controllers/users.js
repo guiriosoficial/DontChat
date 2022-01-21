@@ -18,11 +18,9 @@ async function handleUser(req, res) {
             await setUser(req, res)
         } else {
             const currUser = await Users.findOne({ socketId })
-            const currUserNAme = currUser?.userName
-            const cussUserColor = currUser?.userColor
-
-            if (currUserNAme !== userName || cussUserColor !== userColor) {
-                await updateUser(req, res, currUserNAme, cussUserColor)
+            
+            if (currUser?.userName !== userName || currUser?.userColor !== userColor) {
+                await updateUser(req, res)
             }
         }
     } else {
@@ -60,12 +58,12 @@ async function setUser(req, res) {
             res.send(result)
         })
         .catch(err => {
-            res.status(500).send('Internal Server Error')
+            res.status(500).send('Faild to set user. Reload page to try again')
             console.error('Error on create user', err)
         })
 }
 
-async function updateUser(req, res, currUserNAme, currUserColor) {
+async function updateUser(req, res) {
     const { params, query, body, } = req
     const { userName, userColor } = body
     const { socketId } = params
@@ -82,11 +80,10 @@ async function updateUser(req, res, currUserNAme, currUserColor) {
             delete result._id
             delete result.__v
             res.send(result)
-
-            MessagesController.sendMessage(`Changed from <b style="{color: ${currUserColor}}">${currUserNAme}</b>`, 'log', socketId)
+            MessagesController.sendMessage(`Changed nickname`, 'log', socketId)
         })
         .catch(err => {
-            res.status(500).send('Internal Server Error')
+            res.status(500).send('Faild to update user. Reload page to try again')
             console.error('Error on update user', err)
         })
 }

@@ -4,7 +4,7 @@ function joinRoomPath(socket, next) {
     socket.on('joinRoomPath', (roomPath, callback) => {
         UsersController.joinRoomPath(socket, roomPath)
             .then(() => callback(''))
-            .catch(() => callback('Faild to join the room.'))
+            .catch(() => callback('Faild to join the room. Pleas reload page to try again'))
     })
 
     next()
