@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { setUser } from '../../store/user'
@@ -17,18 +17,25 @@ import './history.scss'
 
 function Chat() {
   const dispatch = useDispatch()
+  const isInitialMount = useRef(true)
   const roomPath = useLocation().pathname
   const { user } = useSelector((state) => state)
   const [userColor, setUserColor] = useState(user.userColor || generateColor())
   const [errorMessage, setErrorMessage] = useState('')
 
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false
+    } else {
+      putUser()
+    }
+  }, [userColor])
 
   const handleChangeUserColor = async (evt) => {
     const newColor = evt.target.value
     
     if (validateColor(newColor) && newColor !== user.userColor) {
       setUserColor(newColor)
-      await putUser()
     } else {
       showErrorMessage('Invalid color. Select a darker color.')
     }
@@ -44,13 +51,6 @@ function Chat() {
     }
   }
 
-  const showErrorMessage = (message) => {
-    setErrorMessage(message)
-    setTimeout(() => {
-      setErrorMessage('')
-    }, 5000)
-  }
-
   const putUser = async (nickName = '') => {
     await axios.put(`http://localhost:3001/users/${socket.id}?roomPath=${roomPath}`, {
       userName: nickName.trim() || user.userName || generateName(),
@@ -64,6 +64,13 @@ function Chat() {
     await axios.get(`http://localhost:3001/messages?roomPath=${roomPath}`)
       .then(({ data }) => dispatch(setMessages(data)))
       .catch(({ response: { data }}) => setErrorMessage(data))
+  }
+
+  const showErrorMessage = (message) => {
+    setErrorMessage(message)
+    setTimeout(() => {
+      setErrorMessage('')
+    }, 5000)
   }
 
   const joinRoomPath = () => {
@@ -85,7 +92,6 @@ function Chat() {
   }, [])
     
   useEffect(() => {
-    // joinRoomPath()
     socket.on('connect', () => {
       setErrorMessage('')
     })
@@ -100,14 +106,14 @@ function Chat() {
         {errorMessage && <div className="error">{errorMessage}</div>}
         <History />
         <span>
-          Click&nbsp;
+          &nbsp;Click&nbsp;
           <a
             href="#"
             onClick={handleChangeUserName}
           >
             here
           </a>
-          &nbsp;to change your nickname!
+          &nbsp;to change your nickname!&nbsp;
           <input
             value={userColor}
             type="color"
