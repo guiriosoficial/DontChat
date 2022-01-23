@@ -21,6 +21,7 @@ function Chat() {
   const roomPath = useLocation().pathname
   const { user } = useSelector((state) => state)
   const [userColor, setUserColor] = useState(user.userColor || generateColor())
+  // const [userName, setUserName] = useState(user.userName || generateName())
   const [errorMessage, setErrorMessage] = useState('')
 
   useEffect(() => {
@@ -50,6 +51,13 @@ function Chat() {
       showErrorMessage('Invalid name. Cannot be shorter than 3 or longer than 27 characters.')
     }
   }
+
+  // const userData = () => {
+  //   return {
+  //     userName: nickName.trim() || user.userName || generateName(),
+  //     userColor
+  //   }
+  // }
 
   const putUser = async (nickName = '') => {
     await axios.put(`http://localhost:3001/users/${socket.id}?roomPath=${roomPath}`, {
@@ -82,13 +90,11 @@ function Chat() {
   }
 
   useEffect(() => {
-    setTimeout(async() => {
-      await getMessages()
+    socket.emit('conn', async() => {
       await putUser()
+      await getMessages()
       joinRoomPath()
-
-    }, 300)
-    return () => socket.off('joinRoomPath', roomPath)
+    })
   }, [])
     
   useEffect(() => {
@@ -104,7 +110,7 @@ function Chat() {
     <SocketContext.Provider value={socket}>
       <main className="chat">
         {errorMessage && <div className="error">{errorMessage}</div>}
-        <History />
+        <History socket={socket} />
         <span>
           &nbsp;Click&nbsp;
           <a
@@ -120,7 +126,7 @@ function Chat() {
             onChange={handleChangeUserColor}
           />
         </span>
-        <Editor />
+        <Editor socket={socket} />
       </main>
     </SocketContext.Provider>
   )

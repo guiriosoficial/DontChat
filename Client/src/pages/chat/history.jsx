@@ -6,9 +6,9 @@ import SocketContext from '../../socket'
 import './style.scss'
 
 function History() {
-  const socket = useContext(SocketContext)
   const dispatch = useDispatch()
   const messageRef = useRef(null)
+  const socket = useContext(SocketContext)
   const { messages } = useSelector((store) => store)
 
   useEffect(() => {

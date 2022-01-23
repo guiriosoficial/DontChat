@@ -15,4 +15,3 @@ db
     .catch(err => {
         console.error('Faild to start http server!', err)
     })
-

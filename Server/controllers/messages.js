@@ -17,7 +17,7 @@ function getMessages(req, res) {
 async function sendMessage(messageContent, messageType, socketId) {
     const userData = await Users.findOne({ socketId })
     const { userName, userColor, roomPath } = userData
-    
+
     const newMessage = new Messages({
         socketId,
         userName,

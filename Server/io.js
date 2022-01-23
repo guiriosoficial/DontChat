@@ -16,6 +16,10 @@ function io(httpServer) {
     
     io.on('connection', (socket) => {
         console.log(`User ${socket.id} connected`)
+
+        socket.on('conn', (callback) => {
+            callback()
+        })
     })
 
     return io
