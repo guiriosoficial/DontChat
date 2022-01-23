@@ -31,9 +31,9 @@ function Home() {
       </form>
       <section>
         Dont login, just use a URL<br />
-        Dont save any message or chat history<br />
-        Dont pass any personal information<br />
-        Dont lose your conversation, download with YourURL.zip<br />
+        Dont disrespect other users<br />
+        Dont send or click in suspect links<br />
+        Dont share any personal information<br />
         Dont forget, change your nickname whenever you want<br />
         Dontchat!<br />
       </section>

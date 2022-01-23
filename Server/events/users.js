@@ -1,4 +1,5 @@
 const UsersController = require('../controllers/users')
+const MessagesController = require('../controllers/messages')
 
 function joinRoomPath(socket, next) {
     socket.on('joinRoomPath', (roomPath, callback) => {
