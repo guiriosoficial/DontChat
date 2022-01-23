@@ -10,16 +10,13 @@ function io(httpServer) {
         }
     })
 
+    io.use(UsersEvents.handleUser)
     io.use(UsersEvents.joinRoomPath)
-    io.use(MessagesEvents.sendMessage)
     io.use(UsersEvents.disconnect)
+    io.use(MessagesEvents.sendMessage)
     
     io.on('connection', (socket) => {
         console.log(`User ${socket.id} connected`)
-
-        socket.on('conn', (callback) => {
-            callback()
-        })
     })
 
     return io

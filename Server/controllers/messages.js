@@ -1,17 +1,17 @@
 const Messages = require('../models/messages')
 const Users = require('../models/users')
 
-function getMessages(req, res) {
-    const { roomPath } = req.query
-    
-    Messages.find({ roomPath })
-        .then(result => {
-            res.send(result)
-        })
-        .catch(err => {
-            res.status(500).send('Internar Server Error')
-            console.error(err)
-        })
+function getMessages(roomPath) {
+    return new Promise((resolve, reject) => {
+        Messages.find({ roomPath })
+            .then(result => {
+                resolve(result)
+            })
+            .catch(err => {
+                reject('Internar Server Error')
+                console.error(err)
+            })
+    })
 }
 
 async function sendMessage(messageContent, messageType, socketId) {
