@@ -4,7 +4,7 @@ const db = require('./db')
 
 const httpServer = createServer(app)
 const io = require('./io')(httpServer)
-global.io = io
+exports.io = io
 
 db
     .then(() => {

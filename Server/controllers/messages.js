@@ -1,5 +1,6 @@
 const Messages = require('../models/messages')
 const Users = require('../models/users')
+const app = require('../server')
 
 function getMessages(roomPath) {
     return new Promise((resolve, reject) => {
@@ -30,7 +31,7 @@ async function sendMessage(messageContent, messageType, socketId) {
     newMessage.save()
         .then(result => {
             const { roomPath } = result
-            global.io.in(roomPath).emit('reciveMessage', result)
+            app.io.in(roomPath).emit('reciveMessage', result)
         })
         .catch(err => {
             console.error(err)

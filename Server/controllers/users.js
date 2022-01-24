@@ -108,7 +108,7 @@ async function leaveRoomPath(socket) {
         const { roomPath } = await Users.findOne({ socketId })
 
         socket.leave(roomPath)
-        await MessagesController.sendMessage('Left room', 'log', socketId, socket)
+        await MessagesController.sendMessage('Left room', 'log', socketId)
         console.log(`User ${socketId} left ${roomPath}`)
     } else {
         console.error('Error on leave room', `User ${socketId} dose not exists`)
@@ -128,7 +128,7 @@ async function joinRoomPath(socket, roomPath) {
         }
 
         socket.join(roomPath)
-        await MessagesController.sendMessage('Joined room', 'log', socketId, socket)
+        await MessagesController.sendMessage('Joined room', 'log', socketId)
         console.log(`User ${socketId} joined ${roomPath}`)
     } else {
         console.error('Error on join room', `User ${socketId} dose not exists`)
