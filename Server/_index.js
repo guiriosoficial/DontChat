@@ -11,11 +11,6 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 const httpServer = createServer(app)
 
-const messagesRouter = require('./routes/messages')
-const usersRouter = require('./routes/users')
-app.use('/messages', messagesRouter)
-app.use('/users', usersRouter)
-
 const io = new Server(httpServer, {
     cors: {
         origin: 'http://localhost:3000',
@@ -23,13 +18,14 @@ const io = new Server(httpServer, {
     }
 })
 
-global.io = io
+exports.io = io
 
 const UsersEvents = require('./events/users')
 const MessagesEvents = require('./events/messages')
+io.use(UsersEvents.handleUser)
 io.use(UsersEvents.joinRoomPath)
-io.use(MessagesEvents.sendMessage)
 io.use(UsersEvents.disconnect)
+io.use(MessagesEvents.sendMessage)
 
 io.on('connection', (socket) => {
     console.log(`User ${socket.id} connected`)
