@@ -8,6 +8,8 @@ exports.io = io
 
 const PORT = process.env.PORT || 3001
 
+console.log(process.env)
+
 db
     .then(() => {
         httpServer.listen(PORT, () => {
