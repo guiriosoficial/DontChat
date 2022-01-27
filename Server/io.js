@@ -7,7 +7,7 @@ const CORS_ORIGIN = process.env.CORS_ORIGIN || 'http://localhost:3000'
 function io(httpServer) {
     const io = new Server(httpServer, {
         cors: {
-            origin: CORS_ORIGIN,
+            origin: '*',
             methods: ["GET", "POST"]
         }
     })
