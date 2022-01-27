@@ -6,9 +6,11 @@ const httpServer = createServer(app)
 const io = require('./io')(httpServer)
 exports.io = io
 
+const PORT = process.env.PORT || 3001
+
 db
     .then(() => {
-        httpServer.listen(process.env.PORT, () => {
+        httpServer.listen(PORT, () => {
             console.log('Server is running on port 3001...')
         })
     })
