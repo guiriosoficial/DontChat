@@ -5,7 +5,7 @@ const MessagesEvents = require('./events/messages')
 function io(httpServer) {
     const io = new Server(httpServer, {
         cors: {
-            origin: 'http://localhost:3000',
+            origin: process.env.CORS_ORIGIN,
             methods: ["GET", "POST"]
         }
     })

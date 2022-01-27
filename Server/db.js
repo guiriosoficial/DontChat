@@ -1,6 +1,6 @@
 const { connect } = require('mongoose')
 
-const db = connect('mongodb://localhost:27017/dontchat')
+const db = connect(process.env.CONNECTION_STRING_URI)
     .then(() => {
         console.log('MongoBD connected...')
     })
