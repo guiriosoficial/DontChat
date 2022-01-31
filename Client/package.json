@@ -1,7 +1,36 @@
 {
   "name": "dontchat-fe",
-  "version": "0.1.0",
-  "private": true,
+  "author": {
+    "name": "Guilherme Rios",
+    "email": "guilherme.rc.98@gmail.com",
+    "url": "https://guiriosoficial.github.io"
+  },
+  "bugs": "https://github.com/guiriosoficial/DontChat/issues",
+  "homepage": "https://github.com/guiriosoficial/DontChat",
+  "version": "1.0.0",
+  "license": "ISC",
+  "keywords": [
+    "chat",
+    "dontchat",
+    "dontpad",
+    "react-js",
+    "react-router",
+    "redux",
+    "socket-io",
+    "url-based"
+  ],
+  "description": "A Url Based Chat inspired in Dontpad.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/guiriosoficial/DontChat.git"
+  },
+  "main": "index.js",
+  "private": false,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "deploy": "cd ../ && git subtree push --prefix Client heroku-dontchat-frontend main || true"
+  },
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.1",
     "react": "^17.0.2",
@@ -15,27 +44,19 @@
   "devDependencies": {
     "node-sass": "^7.0.1"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "deploy": "cd ../ && git subtree push --prefix Client heroku-dontchat-frontend main || true"
+  "engines": {
+    "node": "^16.13.1",
+    "npm": "^8.1.2"
   },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ],
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
     ]
   }
 }
