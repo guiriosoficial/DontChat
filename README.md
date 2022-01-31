@@ -1,5 +1,5 @@
 # DONTCHAT
-Inpired in [Dontpad.com][http://dontpad.com], DontChat is a chat url based.
+Inpired in [Dontpad.com](http://dontpad.com), DontChat is a chat url based.
 
 ## Description
 This is a Open Source project made just to study socket.io, node.js with express.js and react.js with redux.
@@ -13,6 +13,6 @@ This is a Open Source project made just to study socket.io, node.js with express
 - **Run MongoDB:** `mongod --dbpath <path to data directory>` (Create data directory on locale of yout preference)
 - **Install Dependences:** `npm install`
 - **Start Development Serve:** `npm start`
-    - Front-end Runs on [http://localhost:3000/][http://localhost:3000/]
-    - Back-end Runs on [http://localhost:3001/][http://localhost:3001/]
+    - Front-end Runs on [http://localhost:3000/](http://localhost:3000/)
+    - Back-end Runs on [http://localhost:3001/](http://localhost:3001/)
 - **Compiles For Production:** `npm run build` (Just Client: Will Build in `/build`)
