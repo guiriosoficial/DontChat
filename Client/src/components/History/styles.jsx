@@ -1,4 +1,6 @@
-.history {
+import styled from 'styled-components'
+
+const HistryContainer = styled.section`
   padding: 10px;
   overflow: auto;
   flex: 1;
@@ -16,4 +18,13 @@
       &:first-child {margin-top: 0;}
     }
   }
+`
+
+const MessageHeaders = styled.span`
+  color: ${props  => props.color}
+`
+
+export {
+  HistryContainer,
+  MessageHeaders
 }

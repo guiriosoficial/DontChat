@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import './style.scss'
+import { Title, Form, Texts } from './styles'
 
 function Home() {
   const navigate = useNavigate()
@@ -9,8 +9,8 @@ function Home() {
 
   return (
     <main className="home">
-      <h1>DONTCHAT</h1>
-      <form onSubmit={() => navigate(roomPath)}>
+      <Title>DONTCHAT</Title>
+      <Form onSubmit={() => navigate(roomPath)}>
         <label htmlFor="roomPath">
           www.dontchat.com/
         </label>
@@ -28,15 +28,15 @@ function Home() {
         <button type="submit">
           Go!
         </button>
-      </form>
-      <section>
+      </Form>
+      <Texts>
         Dont login, just use a URL<br />
         Dont disrespect other users<br />
         Dont send or click in suspect links<br />
         Dont share any personal information<br />
         Dont forget, change your nickname whenever you want<br />
         Dontchat!<br />
-      </section>
+      </Texts>
     </main>
   )
 }
