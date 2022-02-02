@@ -8,7 +8,7 @@ function validateUserColor(userColor = '#FFFFFF') {
         const q = ((r * 0.299 + g * 0.587 + b * 0.114) / 255) - 0.6
 
         if (q > 0) {
-        return false
+            return false
         } return true
     } catch {
         return false
