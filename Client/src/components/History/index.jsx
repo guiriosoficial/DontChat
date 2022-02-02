@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { updateMessages } from '../../store/messages'
 import { formatDateTime } from '../../utils'
 import SocketContext from '../../socket'
-import './style.scss'
+import { HistryContainer, MessageHeaders } from './styles'
 
 function History() {
   const dispatch = useDispatch()
@@ -19,7 +19,7 @@ function History() {
   }, [dispatch, socket])
 
   return (
-    <section className="history">
+    <HistryContainer>
       <ul>
         {
           messages.map(({
@@ -35,7 +35,7 @@ function History() {
               key={_id}
               ref={messageRef}
             >
-              <span style={{ color: userColor }}>
+              <MessageHeaders color={userColor}>
                 {`[${formatDateTime(dateTime)}]`}
                 &nbsp;
                 <b>
@@ -44,7 +44,7 @@ function History() {
                   {':'}
                 </b>
                 &nbsp;
-              </span>
+              </MessageHeaders>
               {
                 messageType === 'message'
                   ? messageContent
@@ -54,7 +54,7 @@ function History() {
           ))
         }
       </ul>
-    </section>
+    </HistryContainer>
   )
 }
 

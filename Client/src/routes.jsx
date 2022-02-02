@@ -4,8 +4,8 @@ import {
   Routes,
   Route
 } from 'react-router-dom'
-import Home from './pages/home'
-import Chat from './pages/chat'
+import Home from './pages/Home'
+import Chat from './pages/Chat'
 
 function App() {
   return (

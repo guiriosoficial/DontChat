@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react'
 import SocketContext from '../../socket'
-import './editor.scss'
+import { EditorContainer } from './styles'
 
-function FooterEditor() {
+function Editor() {
   const socket = useContext(SocketContext)
   const [message, setMessage] = useState('')
   const handleChangeMessage = (evt) => setMessage(evt.target.value)
@@ -25,7 +25,7 @@ function FooterEditor() {
   }
 
   return (
-    <section className="editor">
+    <EditorContainer>
       <textarea
         rows={3}
         value={message}
@@ -39,8 +39,8 @@ function FooterEditor() {
       >
         Send!
       </button>
-    </section>
+    </EditorContainer>
   )
 }
 
-export default FooterEditor
+export default Editor

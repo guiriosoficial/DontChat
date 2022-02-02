@@ -10,9 +10,9 @@ import {
   validateName
 } from '../../utils'
 import SocketContext, { socket } from '../../socket'
-import History from './history'
-import Editor from './editor'
-import './history.scss'
+import History from '../../components/History'
+import Editor from '../../components/Editor'
+import { ChatContainer, ErrorMessage } from './styles'
 
 function Chat() {
   const dispatch = useDispatch()
@@ -96,8 +96,8 @@ function Chat() {
 
   return (
     <SocketContext.Provider value={socket}>
-      <main className="chat">
-        {errorMessage && <div className="error">{errorMessage}</div>}
+      <ChatContainer>
+        {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
         <History socket={socket} />
         <span>
           &nbsp;Click&nbsp;
@@ -115,7 +115,7 @@ function Chat() {
           />
         </span>
         <Editor socket={socket} />
-      </main>
+      </ChatContainer>
     </SocketContext.Provider>
   )
 }
