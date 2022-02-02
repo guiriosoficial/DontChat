@@ -15,5 +15,5 @@ This is a Open Source project made just to study socket.io, node.js with express
 - **Install Dependences:** `npm install`
 - **Start Development Serve:** `npm start`
     - Front-end Runs on [http://localhost:3000/](http://localhost:3000/)
-    - Back-end Runs on [http://localhost:3001/](http://localhost:3001/)
+    - Back-end Runs on [http://localhost:3001/](http://localhost:3001/) (Recomended to use `nodemon`)
 - **Compiles For Production:** `npm run build` (Just on Client: Will be Build in `/build`)
