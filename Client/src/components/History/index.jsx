@@ -41,14 +41,14 @@ function History() {
                 <b>
                   {userName}
                   {socketId === socket.id && ' (You)'}
-                  {':'}
+                  :
                 </b>
                 &nbsp;
               </MessageHeaders>
               {
                 messageType === 'message'
                   ? messageContent
-                  : <i dangerouslySetInnerHTML={{__html: messageContent}} />
+                  : <i dangerouslySetInnerHTML={{ __html: messageContent }} />
               }
             </li>
           ))

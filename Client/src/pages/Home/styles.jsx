@@ -11,7 +11,8 @@ const Form = styled.form`
   font-size: 21px;
   margin-block-end: 1em;
 
-  input, button {
+  input,
+  button {
     font-size: 21px;
   }
 `

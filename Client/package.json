@@ -28,8 +28,7 @@
   "private": false,
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "deploy": "cd ../ && git subtree push --prefix Client heroku-dontchat-frontend main || true"
+    "build": "react-scripts build"
   },
   "dependencies": {
     "@reduxjs/toolkit": "~1.7.1",
@@ -50,11 +49,5 @@
     ">0.2%",
     "not dead",
     "not op_mini all"
-  ],
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  }
+  ]
 }

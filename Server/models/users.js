@@ -20,7 +20,7 @@ const UsersSchema = new Schema({
     userColor: {
         type: String,
         required: true
-    },
+    }
 })
 
 const UsersModel = model('Users', UsersSchema)

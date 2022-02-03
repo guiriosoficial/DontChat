@@ -1,5 +1,5 @@
 const express = require('express')
-const cors =  require('cors')
+const cors = require('cors')
 const { connect } = require('mongoose')
 const { createServer } = require('http')
 const { Server } = require('socket.io')
@@ -20,7 +20,7 @@ const httpServer = createServer(app)
 const io = new Server(httpServer, {
     cors: {
         origin: CORS_ORIGIN,
-        methods: ["GET", "POST"]
+        methods: ['GET', 'POST']
     }
 })
 
@@ -29,7 +29,7 @@ io.use(UsersEvents.joinRoomPath)
 io.use(UsersEvents.disconnect)
 io.use(MessagesEvents.sendMessage)
 
-io.on('connection', (socket) => {
+io.on('connection', socket => {
     console.log(`User ${socket.id} connected`)
 })
 

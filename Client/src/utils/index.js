@@ -5,9 +5,9 @@ import validateColor from './validateColor'
 import validateName from './validateName'
 
 export {
-    formatDateTime,
-    generateColor,
-    generateName,
-    validateColor,
-    validateName
+  formatDateTime,
+  generateColor,
+  generateName,
+  validateColor,
+  validateName
 }

@@ -6,20 +6,20 @@ const validateUserColor = require('../utils/validateUserColor')
 function handleUser(userData, roomPath) {
     return new Promise(async (resolve, reject) => {
         const { socketId, userName, userColor } = userData
-    
-        const userExists = await Users.exists({ socketId }) || false
-    
+
         const isUserNameValid = validateUserName(userName)
         const isUserColorValid = validateUserColor(userColor)
-        
+
         if (isUserNameValid && isUserColorValid) {
+            const userExists = (await Users.exists({ socketId })) || false
+
             if (!userExists) {
                 setUser(userData, roomPath)
                     .then(result => resolve(result))
                     .catch(err => reject(err))
             } else {
                 const currUser = await Users.findOne({ socketId })
-                
+
                 if (currUser?.userName !== userName || currUser?.userColor !== userColor) {
                     updateUser(userData, roomPath)
                         .then(result => resolve(result))
@@ -28,7 +28,7 @@ function handleUser(userData, roomPath) {
             }
         } else {
             let errorMessage
-    
+
             if (!isUserNameValid && isUserColorValid) {
                 errorMessage = 'Invalid name. Cannot be shorter than 3 or longer than 27 characters.'
             } else if (isUserNameValid && !isUserColorValid) {
@@ -36,7 +36,7 @@ function handleUser(userData, roomPath) {
             } else {
                 errorMessage = 'Name and color is invalid'
             }
-    
+
             reject(errorMessage)
         }
     })
@@ -45,15 +45,16 @@ function handleUser(userData, roomPath) {
 function setUser(userData, roomPath) {
     return new Promise((resolve, reject) => {
         const { socketId, userName, userColor } = userData
-    
+
         const newUser = new Users({
             userName,
             userColor,
             socketId,
             roomPath
         })
-    
-        newUser.save()
+
+        newUser
+            .save()
             .then(result => {
                 resolve(result)
             })
@@ -67,13 +68,13 @@ function setUser(userData, roomPath) {
 function updateUser(userData, roomPath) {
     return new Promise((resolve, reject) => {
         const { socketId, userName, userColor } = userData
-    
+
         const newUser = {
             userName,
             userColor,
             roomPath
         }
-    
+
         Users.findOneAndUpdate({ socketId }, { ...newUser }, { returnDocument: 'after' })
             .then(result => {
                 resolve(result)
@@ -91,7 +92,7 @@ function deleteUser(socket) {
 
     leaveRoomPath(socket).finally(() => {
         Users.findOneAndDelete({ socketId })
-            .then(_result => {
+            .then(() => {
                 console.log(`User ${socketId} deleted`)
             })
             .catch(err => {

@@ -3,7 +3,7 @@ const { Schema, model } = require('mongoose')
 const MessagesSchema = new Schema({
     socketId: {
         type: String,
-        required: true,
+        required: true
     },
     userName: {
         type: String,
@@ -13,7 +13,7 @@ const MessagesSchema = new Schema({
     },
     userColor: {
         type: String,
-        required: true,
+        required: true
     },
     messageType: {
         type: String,
@@ -33,7 +33,7 @@ const MessagesSchema = new Schema({
     dateTime: {
         type: Date,
         default: new Date()
-    },
+    }
 })
 
 const MessagesModel = model('Messages', MessagesSchema)

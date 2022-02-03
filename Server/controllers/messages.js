@@ -28,7 +28,8 @@ async function sendMessage(messageContent, messageType, socketId) {
         roomPath
     })
 
-    newMessage.save()
+    newMessage
+        .save()
         .then(result => {
             const { roomPath } = result
             app.io.in(roomPath).emit('reciveMessage', result)

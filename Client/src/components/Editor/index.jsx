@@ -7,20 +7,20 @@ function Editor() {
   const [message, setMessage] = useState('')
   const handleChangeMessage = (evt) => setMessage(evt.target.value)
 
-  const sendMessage = () => {
-    if (message.trim()) {
-      socket.emit('sendMessage', message.trim(), (res) => {
-        if (res) setMessage('')
-      })
-    }
-  }
-
   const handleEnter = (evt) => {
     const { which, ctrlKey } = evt
 
     if (which === 13 && !ctrlKey) {
       evt.preventDefault()
       sendMessage()
+    }
+  }
+
+  const sendMessage = () => {
+    if (message.trim()) {
+      socket.emit('sendMessage', message.trim(), (res) => {
+        if (res) setMessage('')
+      })
     }
   }
 

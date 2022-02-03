@@ -15,6 +15,4 @@ const EditorContainer = styled.section`
   }
 `
 
-export {
-  EditorContainer
-}
+export { EditorContainer }

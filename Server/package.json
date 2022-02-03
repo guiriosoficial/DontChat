@@ -27,8 +27,7 @@
   "main": "index.js",
   "private": false,
   "scripts": {
-    "start": "node server.js",
-    "deploy": "cd ../ && git subtree push --prefix Server heroku-dontchat-backend main || true"
+    "start": "node server.js"
   },
   "dependencies": {
     "cors": "~2.8.5",

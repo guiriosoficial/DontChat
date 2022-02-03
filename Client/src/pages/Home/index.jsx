@@ -11,9 +11,7 @@ function Home() {
     <main className="home">
       <Title>DONTCHAT</Title>
       <Form onSubmit={() => navigate(roomPath)}>
-        <label htmlFor="roomPath">
-          www.dontchat.com/
-        </label>
+        <label htmlFor="roomPath">www.dontchat.com/</label>
         &nbsp;
         <input
           value={roomPath}
@@ -25,17 +23,20 @@ function Home() {
           onChange={handleChangeRoomPath}
         />
         &nbsp;
-        <button type="submit">
-          Go!
-        </button>
+        <button type="submit">Go!</button>
       </Form>
       <Texts>
-        Dont login, just use a URL<br />
-        Dont disrespect other users<br />
-        Dont send or click in suspect links<br />
-        Dont share any personal information<br />
-        Dont forget, change your nickname whenever you want<br />
-        Dontchat!<br />
+        Dont login, just use a URL
+        <br />
+        Dont disrespect other users
+        <br />
+        Dont send or click in suspect links
+        <br />
+        Dont share any personal information
+        <br />
+        Dont forget, change your nickname whenever you want
+        <br />
+        Dontchat!
       </Texts>
     </main>
   )

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { setUser } from '../../store/user'
 import { setMessages } from '../../store/messages'
-import { 
+import {
   generateColor,
   generateName,
   validateColor,
@@ -33,7 +33,7 @@ function Chat() {
 
   const handleChangeUserColor = async (evt) => {
     const newColor = evt.target.value
-    
+
     if (validateColor(newColor) && newColor !== user.userColor) {
       setUserColor(newColor)
     } else {
@@ -83,8 +83,8 @@ function Chat() {
 
   useEffect(() => {
     handleUser(true)
-  }, [])
-    
+  }, [socket.connected])
+
   useEffect(() => {
     socket.on('connect', () => {
       setErrorMessage('')

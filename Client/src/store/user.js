@@ -15,7 +15,7 @@ const setCookie = (payload) => {
   const expires = new Date()
   expires.setDate(expires.getDate() + 7)
 
-  Object.keys(payload).forEach(key => {
+  Object.keys(payload).forEach((key) => {
     document.cookie = `${key}=${payload[key]}; expires=${expires}`
   })
 }
