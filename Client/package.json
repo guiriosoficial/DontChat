@@ -6,7 +6,7 @@
     "url": "https://guiriosoficial.github.io"
   },
   "bugs": "https://github.com/guiriosoficial/DontChat/issues",
-  "homepage": "https://github.com/guiriosoficial/DontChat",
+  "homepage": "/",
   "version": "1.0.0",
   "license": "ISC",
   "keywords": [
@@ -22,7 +22,7 @@
   "description": "A Url Based Chat inspired in Dontpad.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/guiriosoficial/DontChat.git"
+    "url": "https://github.com/guiriosoficial/DontChat"
   },
   "main": "index.js",
   "private": false,
@@ -31,7 +31,7 @@
     "build": "react-scripts build"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "~1.7.1",
+    "@reduxjs/toolkit": "~1.7.2",
     "react": "~17.0.2",
     "react-dom": "~17.0.2",
     "react-redux": "~7.2.6",

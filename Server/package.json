@@ -6,7 +6,7 @@
     "url": "https://guiriosoficial.github.io"
   },
   "bugs": "https://github.com/guiriosoficial/DontChat/issues",
-  "homepage": "https://github.com/guiriosoficial/DontChat",
+  "homepage": "/",
   "version": "1.0.0",
   "license": "ISC",
   "keywords": [
@@ -22,7 +22,7 @@
   "description": "A Url Based Chat inspired in Dontpad.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/guiriosoficial/DontChat.git"
+    "url": "https://github.com/guiriosoficial/DontChat"
   },
   "main": "index.js",
   "private": false,
@@ -32,7 +32,7 @@
   "dependencies": {
     "cors": "~2.8.5",
     "express": "~4.17.2",
-    "mongoose": "~6.1.7",
+    "mongoose": "~6.1.10",
     "socket.io": "~4.4.1"
   },
   "devDependencies": {
