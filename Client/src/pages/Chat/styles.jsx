@@ -4,6 +4,7 @@ const ChatContainer = styled.main`
   height: 100vh;
   display: flex;
   flex-direction: column;
+  gap: 4px;
 
   & > span {
     font-size: 14px;

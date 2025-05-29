@@ -2,6 +2,8 @@ import React, { useState, useContext } from 'react'
 import SocketContext from '../../socket'
 import { EditorContainer } from './styles'
 
+const ENTER_KEY_CODE = 13
+
 function Editor() {
   const socket = useContext(SocketContext)
   const [message, setMessage] = useState('')
@@ -10,7 +12,7 @@ function Editor() {
   const handleEnter = (evt) => {
     const { which, ctrlKey } = evt
 
-    if (which === 13 && !ctrlKey) {
+    if (which === ENTER_KEY_CODE && !ctrlKey) {
       evt.preventDefault()
       sendMessage()
     }

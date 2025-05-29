@@ -1,13 +1,5 @@
-import formatDateTime from './formatDateTime'
-import generateColor from './generateColor'
-import generateName from './generateName'
-import validateColor from './validateColor'
-import validateName from './validateName'
-
-export {
-  formatDateTime,
-  generateColor,
-  generateName,
-  validateColor,
-  validateName
-}
+export { default as formatDateTime } from './formatDateTime'
+export { default as generateColor } from './generateColor'
+export { default as generateName } from './generateName'
+export { default as validateColor } from './validateColor'
+export { default as validateName } from './validateName'
