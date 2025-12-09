@@ -24,19 +24,16 @@
     "type": "git",
     "url": "https://github.com/guiriosoficial/DontChat"
   },
-  "main": "index.js",
+  "main": "server.js",
   "private": false,
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
     "cors": "~2.8.5",
-    "express": "~4.17.2",
-    "mongoose": "~6.1.10",
-    "socket.io": "~4.4.1"
-  },
-  "devDependencies": {
-    "nodemon": "~2.0.15"
+    "express": "^5.2.1",
+    "mongoose": "^9.0.1",
+    "socket.io": "^4.8.1"
   },
   "engines": {
     "node": "^16.13.1",
