@@ -1,5 +1,5 @@
-const PAD_LENGTH = 2;
-const PAD_CHAR = '0';
+const PAD_LENGTH = 2
+const PAD_CHAR = '0'
 
 function formatDateTime(dateTime = new Date()) {
   const formatString = (value) => String(value).padStart(PAD_LENGTH, PAD_CHAR)

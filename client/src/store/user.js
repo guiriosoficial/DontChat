@@ -1,14 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const getCookie = () => {
-  const cookies = document.cookie.split('; ')
-    .reduce((prev, curr) => {
-      const [key, ...value] = curr.split('=')
-      prev[key] = value.join('=')
-      return prev
-    }, {})
-
-  return cookies
+  return document.cookie
+      .split('; ')
+      .reduce((prev, curr) => {
+        const [key, ...value] = curr.split('=')
+        prev[key] = value.join('=')
+        return prev
+      }, {})
 }
 
 const setCookie = (payload) => {

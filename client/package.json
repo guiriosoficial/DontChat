@@ -1,5 +1,5 @@
 {
-  "name": "dontchat-fe",
+  "name": "dontchat-client",
   "author": {
     "name": "Guilherme Rios",
     "email": "guilherme.rc.98@gmail.com",
@@ -42,8 +42,8 @@
     "styled-components": "~5.3.3"
   },
   "engines": {
-    "node": "^16.13.1",
-    "npm": "^8.1.2"
+    "node": "^24.11.1",
+    "npm": "^11.6.2"
   },
   "browserslist": [
     ">0.2%",

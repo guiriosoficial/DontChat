@@ -1,14 +1,18 @@
 const MIN_LEN = 2
 const MAX_LEN = 28
+const DEFAULT_VALUE = ''
 
-function validateName(nickName = '') {
+/**
+ * Checks if the username meets the length criteria
+ * @param {string} userName - String to be validated
+ * @returns {boolean} - TRUE if the name is valid, FALSE otherwise
+ */
+function validateName(userName = DEFAULT_VALUE) {
   try {
-    const trimNickName = nickName?.trim()
-    const nickNameLength = trimNickName?.length
+    const trimUserName = userName?.trim()
+    const userNameLength = trimUserName?.length
 
-    if (nickNameLength > MIN_LEN && nickNameLength < MAX_LEN) return true
-
-    return false
+    return userNameLength > MIN_LEN && userNameLength < MAX_LEN;
   } catch {
     return false
   }

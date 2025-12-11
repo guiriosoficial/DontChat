@@ -3,14 +3,14 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import App from './routes'
 import store from './store'
-import GlobaStyles from './styles/main'
+import GlobalStyles from './styles/main'
 
 const rootNode = document.getElementById('root')
 
 render(
   <StrictMode>
     <Provider store={store}>
-      <GlobaStyles />
+      <GlobalStyles />
       <App />
     </Provider>
   </StrictMode>,

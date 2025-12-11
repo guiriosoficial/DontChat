@@ -1,35 +1,51 @@
-const MAX_COLOR_VALUE = 255;
-const LUMINANCE_RED = 0.299;
-const LUMINANCE_GREEN = 0.587;
-const LUMINANCE_BLUE = 0.114;
-const CONTRAST_THRESHOLD = 0.6;
-const MIN_LUMINANCE_CONTRAST = 0;
-const HEX_BASE = 16;
-const HEX_LENGTH = 2;
-const PAD_CHAR = '0';
-const INITIAL_USER_COLOR = '#FFFFFF'
+const DEFAULT_VALUE = '#FFFFFF'
+const DARKNESS_THRESHOLD = 0.6
+const LUMINANCE_COEFFICIENTS = {
+  RED: 0.299,
+  GREEN: 0.587,
+  BLUE: 0.114
+}
+const HEX_BASE = 16
+const HEX_COLOR_REGEX = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i
+const MAX_RGB_COLOR_VALUE = 255
 
-
-function validateColor(userColor = INITIAL_USER_COLOR) {
+/**
+ * Checks if the color provided is dark enough.
+ * @param {string} userColor - Color in hexadecimal format
+ * @returns {boolean} - TRUE if the color is valid (dark), FALSE otherwise.
+ */
+function validateColor(userColor = DEFAULT_VALUE) {
   try {
-    const c = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(userColor)
-    const r = parseInt(c[1], HEX_BASE)
-    const g = parseInt(c[2], HEX_BASE)
-    const b = parseInt(c[3], HEX_BASE)
+    const colorMatch = HEX_COLOR_REGEX.exec(userColor)
 
-    const q = (
-      r * LUMINANCE_RED +
-      g * LUMINANCE_GREEN +
-      b * LUMINANCE_BLUE
-    ) / MAX_COLOR_VALUE - CONTRAST_THRESHOLD
+    if (!colorMatch) return false
 
-    if (q > MIN_LUMINANCE_CONTRAST) {
-      return false
-    }
-    return true
+    const [, redHex, greenHex, blueHex] = colorMatch
+
+    const red = parseInt(redHex, HEX_BASE);
+    const green = parseInt(greenHex, HEX_BASE);
+    const blue = parseInt(blueHex, HEX_BASE);
+
+    const luminance = calculateLuminance(red, green, blue);
+
+    return luminance <= DARKNESS_THRESHOLD;
+
   } catch {
     return false
   }
+}
+
+/**
+ * Calculates the relative luminance of an RGB color
+ * @param {number} red - Red channel value (0-255)
+ * @param {number} green - Green channel value (0-255)
+ * @param {number} blue - Blue channel value (0-255)
+ * @returns {number} - Normalized luminance (0-1)
+ */
+function calculateLuminance(red, green, blue) {
+  const { RED, GREEN, BLUE } = LUMINANCE_COEFFICIENTS;
+
+  return (red * RED + green * GREEN + blue * BLUE) / MAX_RGB_COLOR_VALUE;
 }
 
 export default validateColor

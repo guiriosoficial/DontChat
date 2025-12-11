@@ -1,5 +1,5 @@
 {
-  "name": "dontchat-be",
+  "name": "dontchat-server",
   "author": {
     "name": "Guilherme Rios",
     "email": "guilherme.rc.98@gmail.com",
@@ -36,8 +36,8 @@
     "socket.io": "^4.8.1"
   },
   "engines": {
-    "node": "^16.13.1",
-    "npm": "^8.1.2",
-    "mongodb": "^5.0.4"
+    "node": "^24.11.1",
+    "npm": "^11.6.2",
+    "mongodb": "^8.2.2"
   }
 }

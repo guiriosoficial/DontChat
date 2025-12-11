@@ -12,7 +12,7 @@ function History() {
   const { messages } = useSelector((store) => store)
 
   useEffect(() => {
-    socket.on('reciveMessage', (message) => {
+    socket.on('receiveMessage', (message) => {
       dispatch(updateMessages(message))
       messageRef.current.scrollIntoView({ behavior: 'smooth' })
     })

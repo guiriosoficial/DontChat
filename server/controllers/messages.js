@@ -5,8 +5,8 @@ const app = require('../server')
 function getMessages(roomPath) {
     return new Promise((resolve, reject) => {
         Messages.find({ roomPath })
-            .then(result => {
-                resolve(result)
+            .then(res => {
+                resolve(res)
             })
             .catch(err => {
                 reject('Internar Server Error')
@@ -30,9 +30,9 @@ async function sendMessage(messageContent, messageType, socketId) {
 
     newMessage
         .save()
-        .then(result => {
-            const { roomPath } = result
-            app.io.in(roomPath).emit('reciveMessage', result)
+        .then(res => {
+            const { roomPath } = res
+            app.io.in(roomPath).emit('receiveMessage', res)
         })
         .catch(err => {
             console.error(err)

@@ -15,14 +15,14 @@ function handleUser(userData, roomPath) {
 
             if (!userExists) {
                 setUser(userData, roomPath)
-                    .then(result => resolve(result))
+                    .then(res => resolve(res))
                     .catch(err => reject(err))
             } else {
                 const currUser = await Users.findOne({ socketId })
 
                 if (currUser?.userName !== userName || currUser?.userColor !== userColor) {
                     updateUser(userData, roomPath)
-                        .then(result => resolve(result))
+                        .then(res => resolve(res))
                         .catch(err => reject(err))
                 }
             }
@@ -55,11 +55,11 @@ function setUser(userData, roomPath) {
 
         newUser
             .save()
-            .then(result => {
-                resolve(result)
+            .then(res => {
+                resolve(res)
             })
             .catch(err => {
-                reject('Faild to set user. Reload page to try again')
+                reject('Failed to set user. Reload page to try again')
                 console.error('Error on create user', err)
             })
     })
@@ -76,12 +76,12 @@ function updateUser(userData, roomPath) {
         }
 
         Users.findOneAndUpdate({ socketId }, { ...newUser }, { returnDocument: 'after' })
-            .then(result => {
-                resolve(result)
+            .then(res => {
+                resolve(res)
                 MessagesController.sendMessage(`Changed nickname`, 'log', socketId)
             })
             .catch(err => {
-                reject('Faild to update user. Reload page to try again')
+                reject('Failed to update user. Reload page to try again')
                 console.error('Error on update user', err)
             })
     })
@@ -139,6 +139,5 @@ async function joinRoomPath(socket, roomPath) {
 module.exports = {
     handleUser,
     deleteUser,
-    leaveRoomPath,
     joinRoomPath
 }

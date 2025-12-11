@@ -37,11 +37,11 @@ connect(CONNECTION_STRING_URI)
     .then(() => {
         console.log('MongoBD Connected...')
         httpServer.listen(PORT, () => {
-            console.log('Server is running on port 3001...')
+            console.log(`Server is running on port ${PORT}...`)
         })
     })
     .catch(err => {
-        console.error('Faild to connect with MongoDB', err)
+        console.error('Failed to connect with MongoDB', err)
     })
 
 exports.io = io

@@ -1,12 +1,12 @@
 import { createGlobalStyle } from 'styled-components'
 
-const GlobaStyles = createGlobalStyle`
+const GlobalStyles = createGlobalStyle`
   body {
-    font-family: Arial, Helvetica, Tahoma, Verdana;
+    font-family: Arial, Helvetica, Tahoma, Verdana, sans-serif;
     margin: 0;
     padding: 0;
     overflow: hidden;
   }
 `
 
-export default GlobaStyles
+export default GlobalStyles

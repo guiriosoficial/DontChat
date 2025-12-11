@@ -6,11 +6,11 @@ function joinRoomPath(socket, next) {
         UsersController.joinRoomPath(socket, roomPath)
             .then(() => {
                 MessagesController.getMessages(roomPath)
-                    .then(result => callback(result))
-                    .catch(() => callback(new Error('Faild to get messages. Pleas reload page to try again')))
+                    .then(res => callback(res))
+                    .catch(() => callback(new Error('Failed to get messages. Pleas reload page to try again')))
             })
             .catch(() => {
-                callback(new Error('Faild to join the room. Pleas reload page to try again'))
+                callback(new Error('Failed to join the room. Pleas reload page to try again'))
             })
     })
 
@@ -22,9 +22,10 @@ function handleUser(socket, next) {
         userData = { socketId: socket.id, ...userData }
 
         UsersController.handleUser(userData, roomPath)
-            .then(result => callback(result))
+            .then(res => callback(res))
             .catch(err => callback(new Error(err)))
     })
+
     next()
 }
 
