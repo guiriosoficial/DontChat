@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import SocketContext from '../../socket'
+import SocketContext from '@/plugins/socket'
 import { EditorContainer } from './styles'
 
 const ENTER_KEY_CODE = 13

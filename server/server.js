@@ -6,9 +6,9 @@ const { Server } = require('socket.io')
 const UsersEvents = require('./events/users')
 const MessagesEvents = require('./events/messages')
 
-const CORS_ORIGIN = process.env.CORS_ORIGIN || 'http://localhost:3000'
+const CORS_ORIGIN = process.env.CORS_ORIGIN || 'http://localhost:5173'
 const CONNECTION_STRING_URI = process.env.CONNECTION_STRING_URI || 'mongodb://localhost:27017/dontchat'
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || 3000
 
 const app = express()
 app.set('etag', false)

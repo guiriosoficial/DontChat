@@ -1,17 +1,17 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
-import { setUser } from '../../store/user'
-import { setMessages } from '../../store/messages'
+import { setUser } from '@/store/user'
+import { setMessages } from '@/store/messages'
 import {
   generateColor,
   generateName,
   validateColor,
   validateName
-} from '../../utils'
-import SocketContext, { socket } from '../../socket'
-import History from '../../components/History'
-import Editor from '../../components/Editor'
+} from '@/utils'
+import SocketContext, { socket } from '@/plugins/socket'
+import History from '@/components/History'
+import Editor from '@/components/Editor'
 import { ChatContainer, ErrorMessage } from './styles'
 
 function Chat() {

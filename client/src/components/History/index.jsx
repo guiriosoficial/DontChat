@@ -1,8 +1,8 @@
 import React, { useEffect, useContext, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateMessages } from '../../store/messages'
-import { formatDateTime } from '../../utils'
-import SocketContext from '../../socket'
+import { updateMessages } from '@/store/messages'
+import { formatDateTime } from '@/utils'
+import SocketContext from '@/plugins/socket'
 import { HistryContainer, MessageHeaders } from './styles'
 
 function History() {
