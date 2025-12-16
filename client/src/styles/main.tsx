@@ -8,5 +8,4 @@ const GlobalStyles = createGlobalStyle`
     overflow: hidden;
   }
 `
-
 export default GlobalStyles

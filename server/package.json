@@ -24,6 +24,7 @@
     "type": "git",
     "url": "https://github.com/guiriosoficial/DontChat"
   },
+  "type": "module",
   "main": "server.js",
   "private": false,
   "scripts": {
@@ -34,6 +35,10 @@
     "express": "^5.2.1",
     "mongoose": "^9.0.1",
     "socket.io": "^4.8.1"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.2",
+    "typescript": "^5.9.3"
   },
   "engines": {
     "node": "^24.11.1",

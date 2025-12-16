@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose')
+import { Schema, model } from 'mongoose'
 
 const UsersSchema = new Schema({
     socketId: {
@@ -25,4 +25,4 @@ const UsersSchema = new Schema({
 
 const UsersModel = model('Users', UsersSchema)
 
-module.exports = UsersModel
+export default UsersModel

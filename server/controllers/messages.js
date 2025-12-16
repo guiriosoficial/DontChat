@@ -1,6 +1,6 @@
-const Messages = require('../models/messages')
-const Users = require('../models/users')
-const app = require('../server')
+import Messages from '../models/messages.js'
+import Users from '../models/users.js'
+import * as app from '../server.js'
 
 function getMessages(roomPath) {
     return new Promise((resolve, reject) => {
@@ -39,7 +39,7 @@ async function sendMessage(messageContent, messageType, socketId) {
         })
 }
 
-module.exports = {
+export {
     getMessages,
     sendMessage
 }

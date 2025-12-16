@@ -1,6 +1,5 @@
-import React from 'react'
 import {
-  BrowserRouter as Router,
+  BrowserRouter,
   Routes,
   Route
 } from 'react-router-dom'
@@ -9,12 +8,12 @@ import Chat from '@/pages/Chat'
 
 function App() {
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
-        <Route element={<Home />} path="/" exact />
+        <Route element={<Home />} path="/" />
         <Route element={<Chat />} path="/*" />
       </Routes>
-    </Router>
+    </BrowserRouter>
   )
 }
 

@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Utility functions for the application
+ * This module exports various utility functions for date formatting,
+ * color generation/validation, name generation/validation, etc.
+ */
 export { default as formatDateTime } from './formatDateTime'
 export { default as generateColor } from './generateColor'
 export { default as generateName } from './generateName'

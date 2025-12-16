@@ -1,5 +1,5 @@
-const UsersController = require('../controllers/users')
-const MessagesController = require('../controllers/messages')
+import * as UsersController from '../controllers/users.js'
+import * as MessagesController from '../controllers/messages.js'
 
 function joinRoomPath(socket, next) {
     socket.on('joinRoomPath', (roomPath, callback) => {
@@ -38,7 +38,7 @@ function disconnect(socket, next) {
     next()
 }
 
-module.exports = {
+export {
     joinRoomPath,
     handleUser,
     disconnect

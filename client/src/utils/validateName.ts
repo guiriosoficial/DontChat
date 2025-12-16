@@ -14,15 +14,15 @@ const DEFAULT_VALUE = ''
  * validateName("  valid  ") // true (gets trimmed to "valid")
  * validateName(null) // false (handles null/undefined safely)
  */
-function validateUserName(userName = DEFAULT_VALUE) {
-    try {
-        const trimUserName = userName?.trim()
-        const userNameLength = trimUserName?.length
+function validateName(userName: string = DEFAULT_VALUE): boolean {
+  try {
+    const trimUserName = userName?.trim()
+    const userNameLength = trimUserName?.length
 
-        return userNameLength > MIN_LEN && userNameLength < MAX_LEN
-    } catch {
-        return false
-    }
+    return userNameLength > MIN_LEN && userNameLength < MAX_LEN;
+  } catch {
+    return false
+  }
 }
 
-export default validateUserName
+export default validateName

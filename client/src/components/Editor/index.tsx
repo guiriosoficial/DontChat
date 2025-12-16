@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import { useState, useContext } from 'react'
 import SocketContext from '@/plugins/socket'
 import { EditorContainer } from './styles'
 

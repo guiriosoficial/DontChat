@@ -1,7 +1,7 @@
-const Users = require('../models/users')
-const MessagesController = require('./messages')
-const validateUserName = require('../utils/validateUserName')
-const validateUserColor = require('../utils/validateUserColor')
+import Users from '../models/users.js'
+import * as MessagesController from './messages.js'
+import validateUserName from '../utils/validateUserName.js'
+import validateUserColor from '../utils/validateUserColor.js'
 
 function handleUser(userData, roomPath) {
     return new Promise(async (resolve, reject) => {
@@ -136,7 +136,7 @@ async function joinRoomPath(socket, roomPath) {
     }
 }
 
-module.exports = {
+export {
     handleUser,
     deleteUser,
     joinRoomPath

@@ -1,10 +1,10 @@
-const express = require('express')
-const cors = require('cors')
-const { connect } = require('mongoose')
-const { createServer } = require('http')
-const { Server } = require('socket.io')
-const UsersEvents = require('./events/users')
-const MessagesEvents = require('./events/messages')
+import express from 'express'
+import cors from 'cors'
+import { connect } from 'mongoose'
+import { createServer } from 'http'
+import { Server } from 'socket.io'
+import * as UsersEvents from './events/users.js'
+import * as MessagesEvents from './events/messages.js'
 
 const CORS_ORIGIN = process.env.CORS_ORIGIN || 'http://localhost:5173'
 const CONNECTION_STRING_URI = process.env.CONNECTION_STRING_URI || 'mongodb://localhost:27017/dontchat'
@@ -15,14 +15,16 @@ app.set('etag', false)
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-const httpServer = createServer(app)
 
-const io = new Server(httpServer, {
-    cors: {
-        origin: CORS_ORIGIN,
-        methods: ['GET', 'POST']
-    }
-})
+const httpServer = createServer(app)
+const corsOptions = {
+  cors: {
+    origin: CORS_ORIGIN,
+    methods: ['GET', 'POST']
+  }
+}
+
+const io = new Server(httpServer, corsOptions)
 
 io.use(UsersEvents.handleUser)
 io.use(UsersEvents.joinRoomPath)
@@ -44,4 +46,4 @@ connect(CONNECTION_STRING_URI)
         console.error('Failed to connect with MongoDB', err)
     })
 
-exports.io = io
+export { io }

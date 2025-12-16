@@ -1,4 +1,4 @@
-const MessagesController = require('../controllers/messages')
+import * as MessagesController from '../controllers/messages.js'
 
 function sendMessage(socket, next) {
     socket.on('sendMessage', (message, callback) => {
@@ -12,6 +12,6 @@ function sendMessage(socket, next) {
     next()
 }
 
-module.exports = {
+export {
     sendMessage
 }
