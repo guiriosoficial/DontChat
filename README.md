@@ -1,22 +1,52 @@
 # DONTCHAT
-Inpired in [Dontpad.com](http://dontpad.com), DontChat is a chat url based.
+Inspired by [Dontpad.com](http://dontpad.com), DontChat is a url based chat.
 
 ## Description
-This is a Open Source project made just to study socket.io, node.js with express.js and react.js with redux.
+This is an Open Source project made just to study socket.io, node.js with express.js and react.js with redux.
 
 ## Project Setup
+### Front-End (Client)
+- **Go to Folder**:
+```
+cd client
+```
+- **Install Dependencies:**
+```
+npm install
+```
+- **Start Development Serve:**
+```
+npm run dev
+```
+Will Runs on [http://localhost:5173/](http://localhost:3000/)
 
-- **Requirements:**
-    - `Node`: (^16.13.1)
-    - `NPM`: (^8.1.2)
-    - `MongoDB Comunity`: (^5.0.4)
-- **Run MongoDB:** `mongod --dbpath <path to data directory>`
-    - Create data directory on locale of yout preference
-- **Install Dependencies:** `npm install`
-- **Start Development Serve:** `npm start`
-    - Front-end Runs on [http://localhost:5173/](http://localhost:3000/)
-    - Back-end Runs on [http://localhost:3000/](http://localhost:3001/) (Recommended to use `nodemon`)
-- **Compiles For Production:** `npm run build` (Just on Client: Will be Build in `/build`)
+- **Compiles For Production:**
+```
+npm run build
+```
+Will be Build in `/build`
+### Back-End (Server)
+- **Go to Folder**:
+```
+cd server
+```
+- **Run MongoDB:** - (Create data directory on locale of your preference)
+```
+# MongoDB Comunity is Required
+mongod --dbpath <path to data directory>
+```
+- **Install Dependencies:**
+```
+npm install
+```
+- **Start Development Serve:**
+```
+npm run dev
+```
+Will Runs on [http://localhost:3000/](http://localhost:3001/)
 
 ## TODO
 - Add Ant-spam System
+- Implements TypeScript in Server
+- Create Docker Documentation
+- 
