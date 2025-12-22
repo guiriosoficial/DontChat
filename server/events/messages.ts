@@ -1,6 +1,7 @@
-import * as MessagesController from '../controllers/messages.js'
+import * as MessagesController from '../controllers/messages.ts'
+import type { Socket, ExtendedError } from 'socket.io';
 
-function sendMessage(socket, next) {
+function sendMessage(socket: Socket, next: (err?: ExtendedError) => void): void {
     socket.on('sendMessage', (message, callback) => {
         if (message.trim()) {
             MessagesController.sendMessage(message, 'message', socket.id)

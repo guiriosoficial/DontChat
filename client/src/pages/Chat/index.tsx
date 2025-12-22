@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { setUser } from '@/store/user'
@@ -31,7 +31,7 @@ function Chat() {
     }
   }, [userColor, userName])
 
-  const handleChangeUserColor = async (evt) => {
+  const handleChangeUserColor = async (evt: React.ChangeEvent<HTMLInputElement>) => {
     const newColor = evt.target.value
 
     if (validateColor(newColor) && newColor !== user.userColor) {
@@ -44,14 +44,14 @@ function Chat() {
   const handleChangeUserName = async () => {
     const newName = prompt('Please, insert a nickname:')
 
-    if (validateName(newName) && newName !== user.userName) {
+    if (newName && validateName(newName) && newName !== user.userName) {
       setUserName(newName)
     } else if (newName) {
       showErrorMessage('Invalid name. Cannot be shorter than 3 or longer than 27 characters.')
     }
   }
 
-  const showErrorMessage = (message) => {
+  const showErrorMessage = (message: string) => {
     setErrorMessage(message)
     setTimeout(() => {
       setErrorMessage('')

@@ -16,15 +16,16 @@ npm install
 ```
 - **Start Development Serve:**
 ```
-npm run dev
+npm start
 ```
-Will Runs on [http://localhost:5173/](http://localhost:3000/)
+Will Run on [http://localhost:5173/](http://localhost:3000/)
 
 - **Compiles For Production:**
 ```
 npm run build
 ```
 Will be Build in `/build`
+
 ### Back-End (Server)
 - **Go to Folder**:
 ```
@@ -41,9 +42,9 @@ npm install
 ```
 - **Start Development Serve:**
 ```
-npm run dev
+npm start
 ```
-Will Runs on [http://localhost:3000/](http://localhost:3001/)
+Will Run on [http://localhost:3000/](http://localhost:3001/)
 
 ## TODO
 - Add Ant-spam System

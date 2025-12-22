@@ -1,6 +1,17 @@
 import { Schema, model } from 'mongoose'
+import type { MessageType } from "../types";
 
-const MessagesSchema = new Schema({
+interface IMessage {
+    socketId: string
+    userName: string
+    userColor: string
+    roomPath: string
+    messageContent: string
+    messageType: MessageType
+    dateTime: Date
+}
+
+const MessagesSchema = new Schema<IMessage>({
     socketId: {
         type: String,
         required: true
@@ -39,3 +50,4 @@ const MessagesSchema = new Schema({
 const MessagesModel = model('Messages', MessagesSchema)
 
 export default MessagesModel
+export type { IMessage }

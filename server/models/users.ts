@@ -1,6 +1,13 @@
 import { Schema, model } from 'mongoose'
 
-const UsersSchema = new Schema({
+interface IUser {
+    socketId: string,
+    userName: string,
+    roomPath: string,
+    userColor: string,
+}
+
+const UsersSchema = new Schema<IUser>({
     socketId: {
         type: String,
         required: true,
@@ -26,3 +33,4 @@ const UsersSchema = new Schema({
 const UsersModel = model('Users', UsersSchema)
 
 export default UsersModel
+export type { IUser }

@@ -1,8 +1,9 @@
-import Messages from '../models/messages.js'
-import Users from '../models/users.js'
-import * as app from '../server.js'
+import Messages, { type IMessage } from '../models/messages.ts'
+import Users, { type IUser } from '../models/users.ts'
+import * as app from '../server.ts'
+import type { MessageType } from "../types";
 
-function getMessages(roomPath) {
+function getMessages(roomPath: string): Promise<IMessage[]> {
     return new Promise((resolve, reject) => {
         Messages.find({ roomPath })
             .then(res => {
@@ -15,7 +16,7 @@ function getMessages(roomPath) {
     })
 }
 
-async function sendMessage(messageContent, messageType, socketId) {
+async function sendMessage(messageContent: string, messageType: MessageType, socketId: string): Promise<void> {
     const userData = await Users.findOne({ socketId })
     const { userName, userColor, roomPath } = userData
 

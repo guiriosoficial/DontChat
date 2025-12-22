@@ -1,7 +1,8 @@
-import * as UsersController from '../controllers/users.js'
-import * as MessagesController from '../controllers/messages.js'
+import * as UsersController from '../controllers/users.ts'
+import * as MessagesController from '../controllers/messages.ts'
+import type { ExtendedError, Socket } from 'socket.io'
 
-function joinRoomPath(socket, next) {
+function joinRoomPath(socket: Socket, next: (err?: ExtendedError) => void): void {
     socket.on('joinRoomPath', (roomPath, callback) => {
         UsersController.joinRoomPath(socket, roomPath)
             .then(() => {
@@ -17,7 +18,7 @@ function joinRoomPath(socket, next) {
     next()
 }
 
-function handleUser(socket, next) {
+function handleUser(socket: Socket, next: (err?: ExtendedError) => void): void {
     socket.on('handleUser', (userData, roomPath, callback) => {
         userData = { socketId: socket.id, ...userData }
 
@@ -29,7 +30,7 @@ function handleUser(socket, next) {
     next()
 }
 
-function disconnect(socket, next) {
+function disconnect(socket: Socket, next: (err?: ExtendedError) => void): void {
     socket.on('disconnect', () => {
         console.log(`User ${socket.id} disconnected`)
         UsersController.deleteUser(socket)

@@ -1,3 +1,4 @@
+import React from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Title, Form, Texts } from './styles'
@@ -5,7 +6,7 @@ import { Title, Form, Texts } from './styles'
 function Home() {
   const navigate = useNavigate()
   const [roomPath, setRoomPath] = useState('')
-  const handleChangeRoomPath = (evt) => setRoomPath(evt.target.value)
+  const handleChangeRoomPath = (evt: React.ChangeEvent<HTMLInputElement>) => setRoomPath(evt.target.value)
 
   return (
     <main className="home">

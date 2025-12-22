@@ -1,9 +1,10 @@
-import Users from '../models/users.js'
-import * as MessagesController from './messages.js'
-import validateUserName from '../utils/validateUserName.js'
-import validateUserColor from '../utils/validateUserColor.js'
+import Users, { type IUser } from '../models/users.ts'
+import * as MessagesController from './messages.ts'
+import validateUserName from '../utils/validateUserName.ts'
+import validateUserColor from '../utils/validateUserColor.ts'
+import type { Socket } from "socket.io";
 
-function handleUser(userData, roomPath) {
+function handleUser(userData: IUser, roomPath: string) {
     return new Promise(async (resolve, reject) => {
         const { socketId, userName, userColor } = userData
 
@@ -42,7 +43,7 @@ function handleUser(userData, roomPath) {
     })
 }
 
-function setUser(userData, roomPath) {
+function setUser(userData: IUser, roomPath: string) {
     return new Promise((resolve, reject) => {
         const { socketId, userName, userColor } = userData
 
@@ -65,7 +66,7 @@ function setUser(userData, roomPath) {
     })
 }
 
-function updateUser(userData, roomPath) {
+function updateUser(userData: IUser, roomPath: string) {
     return new Promise((resolve, reject) => {
         const { socketId, userName, userColor } = userData
 
@@ -87,7 +88,7 @@ function updateUser(userData, roomPath) {
     })
 }
 
-function deleteUser(socket) {
+function deleteUser(socket: Socket): void {
     const socketId = socket.id
 
     leaveRoomPath(socket).finally(() => {
@@ -101,7 +102,7 @@ function deleteUser(socket) {
     })
 }
 
-async function leaveRoomPath(socket) {
+async function leaveRoomPath(socket: Socket): Promise<void> {
     const socketId = socket.id
     const clientExists = await Users.exists({ socketId })
 
@@ -116,7 +117,7 @@ async function leaveRoomPath(socket) {
     }
 }
 
-async function joinRoomPath(socket, roomPath) {
+async function joinRoomPath(socket: Socket, roomPath: string): Promise<void> {
     const socketId = socket.id
     const clientExists = await Users.exists({ socketId })
 
