@@ -11,7 +11,7 @@ const DEFAULT_VALUE = ''
  * validateName("John") // true
  * validateName("Jo") // false (too short)
  * validateName("A".repeat(30)) // false (too long)
- * validateName("  valid  ") // true (gets trimmed to "valid")
+ * validateName(" valid ") // true (gets trimmed to "valid")
  * validateName(null) // false (handles null/undefined safely)
  */
 function validateName(userName: string = DEFAULT_VALUE): boolean {

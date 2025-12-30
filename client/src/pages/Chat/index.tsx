@@ -98,7 +98,7 @@ function Chat() {
     <SocketContext.Provider value={socket}>
       <ChatContainer>
         {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
-        <History socket={socket} />
+        <History />
         <span>
           &nbsp;Click&nbsp;
           <a
@@ -114,7 +114,7 @@ function Chat() {
             onChange={handleChangeUserColor}
           />
         </span>
-        <Editor socket={socket} />
+        <Editor />
       </ChatContainer>
     </SocketContext.Provider>
   )

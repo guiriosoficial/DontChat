@@ -1,8 +1,7 @@
 # DONTCHAT
 Inspired by [Dontpad.com](http://dontpad.com), DontChat is a url based chat.
 
-## Description
-This is an Open Source project made just to study socket.io, node.js with express.js and react.js with redux.
+_This is an Open Source project made just to study socket.io, node.js with express.js and react.js with redux._
 
 ## Project Setup
 ### Front-End (Client)
@@ -18,13 +17,10 @@ npm install
 ```
 npm start
 ```
-Will Run on [http://localhost:5173/](http://localhost:3000/)
-
-- **Compiles For Production:**
+- **Build For Production:**
 ```
 npm run build
 ```
-Will be Build in `/build`
 
 ### Back-End (Server)
 - **Go to Folder**:
@@ -44,10 +40,11 @@ npm install
 ```
 npm start
 ```
-Will Run on [http://localhost:3000/](http://localhost:3001/)
 
 ## TODO
 - Add Ant-spam System
-- Implements TypeScript in Server
+- Block equal names in the same room
 - Create Docker Documentation
-- 
+- Remove Implicit Any Types
+- Add Lint
+- Create Tests

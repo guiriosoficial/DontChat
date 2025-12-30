@@ -6,7 +6,9 @@ import { Title, Form, Texts } from './styles'
 function Home() {
   const navigate = useNavigate()
   const [roomPath, setRoomPath] = useState('')
-  const handleChangeRoomPath = (evt: React.ChangeEvent<HTMLInputElement>) => setRoomPath(evt.target.value)
+
+  const handleChangeRoomPath = (evt: React.ChangeEvent<HTMLInputElement>) =>
+    setRoomPath(evt.target.value)
 
   return (
     <main className="home">

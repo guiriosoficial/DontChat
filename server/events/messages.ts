@@ -1,4 +1,4 @@
-import * as MessagesController from '../controllers/messages.ts'
+import * as MessagesController from '../services/messages.ts'
 import type { Socket, ExtendedError } from 'socket.io';
 
 function sendMessage(socket: Socket, next: (err?: ExtendedError) => void): void {

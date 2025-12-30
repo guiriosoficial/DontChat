@@ -1,7 +1,7 @@
 import Messages, { type IMessage } from '../models/messages.ts'
-import Users, { type IUser } from '../models/users.ts'
+import Users from '../models/users.ts'
 import * as app from '../server.ts'
-import type { MessageType } from "../types";
+import type { MessageType } from '../types';
 
 function getMessages(roomPath: string): Promise<IMessage[]> {
     return new Promise((resolve, reject) => {
@@ -18,6 +18,9 @@ function getMessages(roomPath: string): Promise<IMessage[]> {
 
 async function sendMessage(messageContent: string, messageType: MessageType, socketId: string): Promise<void> {
     const userData = await Users.findOne({ socketId })
+
+    if (!userData) return
+
     const { userName, userColor, roomPath } = userData
 
     const newMessage = new Messages({

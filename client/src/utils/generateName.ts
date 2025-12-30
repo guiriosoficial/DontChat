@@ -57,7 +57,7 @@ function generateLength(): number {
 /**
  * Capitalizes the first letter of a string
  * @param {string} string - The string to capitalize
- * @returns {string} The string with first letter capitalized and rest in lowercase
+ * @returns {string} The string with the first letter capitalized and rest in lowercase
  * @example
  * capitalizeFirstLetter("hello") // "Hello"
  * capitalizeFirstLetter("WORLD") // "World"

@@ -1,8 +1,8 @@
-import Users, { type IUser } from '../models/users.ts'
 import * as MessagesController from './messages.ts'
+import Users, { type IUser } from '../models/users.ts'
 import validateUserName from '../utils/validateUserName.ts'
 import validateUserColor from '../utils/validateUserColor.ts'
-import type { Socket } from "socket.io";
+import type { Socket } from 'socket.io';
 
 function handleUser(userData: IUser, roomPath: string) {
     return new Promise(async (resolve, reject) => {
@@ -107,7 +107,11 @@ async function leaveRoomPath(socket: Socket): Promise<void> {
     const clientExists = await Users.exists({ socketId })
 
     if (clientExists) {
-        const { roomPath } = await Users.findOne({ socketId })
+        const user = await Users.findOne({ socketId })
+
+        if (!user) return
+
+        const { roomPath } = user
 
         socket.leave(roomPath)
         await MessagesController.sendMessage('Left room', 'log', socketId)
@@ -122,7 +126,11 @@ async function joinRoomPath(socket: Socket, roomPath: string): Promise<void> {
     const clientExists = await Users.exists({ socketId })
 
     if (clientExists) {
-        const { roomPath: currRoomPath } = await Users.findOne({ socketId })
+        const user = await Users.findOne({ socketId })
+
+        if (!user) return
+
+        const { roomPath: currRoomPath } = user
 
         if (currRoomPath !== roomPath) {
             await leaveRoomPath(socket)

@@ -1,31 +1,36 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import type { IUser } from "@/types/user";
+
+const EXPIRES_IN_DAYS = 7
 
 const getCookie = () => {
-  return document.cookie
-      .split('; ')
-      .reduce((prev, curr) => {
-        const [key, ...value] = curr.split('=')
-        prev[key] = value.join('=')
-        return prev
-      }, {})
+  const match = document.cookie.match(/user_data=([^;]+)/)
+  if (!match) return {} as IUser
+
+  try {
+    return JSON.parse(decodeURIComponent(match[1]))
+  } catch {
+    return {} as IUser
+  }
 }
 
-const setCookie = (payload) => {
+const setCookie = (payload: IUser) => {
   const expires = new Date()
-  expires.setDate(expires.getDate() + 7)
+  expires.setDate(expires.getDate() + EXPIRES_IN_DAYS)
 
-  Object.keys(payload).forEach((key) => {
-    document.cookie = `${key}=${payload[key]}; expires=${expires}`
-  })
+  const userData = JSON.stringify(payload)
+  document.cookie = `user_data=${encodeURIComponent(userData)}; expires=${expires}; path=/`
 }
+
+const initialState: IUser = getCookie()
 
 export const userSlice = createSlice({
   name: 'user',
-  initialState: getCookie() || {},
+  initialState,
   reducers: {
-    setUser: (_state, { payload }) => {
-      setCookie(payload)
-      return getCookie() || payload
+    setUser: (_state, action: PayloadAction<IUser>) => {
+      setCookie(action.payload)
+      return action.payload
     }
   }
 })

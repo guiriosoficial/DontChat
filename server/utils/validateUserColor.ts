@@ -18,7 +18,7 @@ const MAX_RGB_COLOR_VALUE = 255
  * validateColor("#ffffff") // false (white is too light)
  * validateColor("invalid") // false (invalid format)
  */
-function validateUserColor(userColor = DEFAULT_VALUE) {
+function validateUserColor(userColor: string = DEFAULT_VALUE): boolean {
     try {
         const colorMatch = HEX_COLOR_REGEX.exec(userColor)
 
@@ -50,7 +50,7 @@ function validateUserColor(userColor = DEFAULT_VALUE) {
  * calculateLuminance(255, 255, 255) // 1 (white)
  * calculateLuminance(128, 64, 192) // ~0.4
  */
-function calculateLuminance(red, green, blue) {
+function calculateLuminance(red: number, green: number, blue: number): number {
     const { RED, GREEN, BLUE } = LUMINANCE_COEFFICIENTS;
 
     return (red * RED + green * GREEN + blue * BLUE) / MAX_RGB_COLOR_VALUE;

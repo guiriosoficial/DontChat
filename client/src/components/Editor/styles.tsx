@@ -3,6 +3,7 @@ import styled from 'styled-components'
 const EditorContainer = styled.section`
   display: flex;
   margin: 0 10px 10px;
+  gap: 8px;
 
   button {
     font-size: 21px;

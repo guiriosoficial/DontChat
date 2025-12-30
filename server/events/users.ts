@@ -1,5 +1,5 @@
-import * as UsersController from '../controllers/users.ts'
-import * as MessagesController from '../controllers/messages.ts'
+import * as UsersController from '../services/users.ts'
+import * as MessagesController from '../services/messages.ts'
 import type { ExtendedError, Socket } from 'socket.io'
 
 function joinRoomPath(socket: Socket, next: (err?: ExtendedError) => void): void {

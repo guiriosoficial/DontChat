@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose'
-import type { MessageType } from "../types";
+import type { MessageType } from '../types'
 
 interface IMessage {
     socketId: string
