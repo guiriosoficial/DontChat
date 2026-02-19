@@ -27,7 +27,7 @@
   "main": "index.js",
   "private": false,
   "scripts": {
-    "start": "vite",
+    "dev": "vite",
     "build": "tsc -b && vite build",
     "serve": "vite preview"
   },
